@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import {
   ArrowRight,
   Bot,
@@ -129,7 +129,7 @@ export default function Services() {
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -139,7 +139,7 @@ export default function Services() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30, scale: 0.9 },
     visible: {
       opacity: 1,
