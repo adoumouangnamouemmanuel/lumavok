@@ -1,39 +1,31 @@
-"use client"
+import { SiteHeader } from '@/components/site-header'
+import { Hero } from '@/components/hero'
+import { Marquee } from '@/components/marquee'
+import { Services } from '@/components/services'
+import { Approach } from '@/components/approach'
+import { Process } from '@/components/process'
+import { Pricing } from '@/components/pricing'
+import { Impact } from '@/components/impact'
+import { Testimonials } from '@/components/testimonials'
+import { Contact } from '@/components/contact'
+import { SiteFooter } from '@/components/site-footer'
 
-import { useEffect, useState } from "react"
-import Navbar from "@/components/navbar"
-import Hero from "@/components/sections/hero"
-import About from "@/components/sections/about"
-import Services from "@/components/sections/services"
-import Portfolio from "@/components/sections/portfolio"
-import Testimonials from "@/components/sections/testimonials"
-import Stats from "@/components/sections/stats"
-import Contact from "@/components/sections/contact"
-import Footer from "@/components/footer"
-
-export default function Home() {
-  const [isScrolled, setIsScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
+export default function Page() {
   return (
-    <main className="min-h-screen bg-background">
-      <Navbar isScrolled={isScrolled} />
-      <Hero />
-      <About />
-      <Services />
-      <Portfolio />
-      <Testimonials />
-      {/* <Stats /> */}
-      <Contact />
-      <Footer />
-    </main>
+    <>
+      <SiteHeader />
+      <main>
+        <Hero />
+        <Marquee />
+        <Services />
+        <Approach />
+        <Process />
+        <Pricing />
+        <Impact />
+        <Testimonials />
+        <Contact />
+      </main>
+      <SiteFooter />
+    </>
   )
 }
