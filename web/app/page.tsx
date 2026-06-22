@@ -14,7 +14,7 @@ export default function Page() {
   return (
     <>
       <SiteHeader />
-      <main>
+      <main className="w-full overflow-hidden">
         <Hero />
         <Marquee />
         <Services />

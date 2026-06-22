@@ -107,7 +107,7 @@ export default function TeamPage() {
   return (
     <>
       <SiteHeader />
-      <main>
+      <main className="w-full overflow-hidden">
         {/* Hero */}
         <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
           <div className="pointer-events-none absolute inset-0 -z-10 bg-dot-grid opacity-20" />
