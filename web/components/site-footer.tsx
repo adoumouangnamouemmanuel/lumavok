@@ -142,7 +142,7 @@ export function SiteFooter() {
               </div>
               <div className="mt-6">
                 <p className="text-sm text-background/60">
-                  📍 N&apos;Djamena, Chad — West Africa
+                  📍 Accra, Ghana; West Africa
                 </p>
                 <a
                   href="mailto:contact@lumavok.com"

@@ -40,7 +40,7 @@ function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: strin
 }
 
 const stats = [
-  { value: '1.4', suffix: 'B', label: 'Africans — the largest digitally ambitious market on earth' },
+  { value: '1.4', suffix: 'B', label: 'Africans; the largest digitally ambitious market on earth' },
   { value: '60', suffix: '%', label: 'Under the age of 25, hungry for digital inclusion' },
   { value: '45', suffix: '', label: 'Dollar entry point that serves even micro-entrepreneurs', prefix: '$' },
   { value: '6', suffix: '', label: 'Core service pillars under one trusted partner' },
@@ -72,7 +72,7 @@ export function Impact() {
                   <span className="text-google-blue">digital future</span>.
                 </>
               }
-              description="Economic, social, and technological — we don't just build products, we build people. As we grow, we train and employ young African technologists, compounding local capacity over time."
+              description="Economic, social, and technological; we don't just build products, we build people. As we grow, we train and employ young African technologists, compounding local capacity over time."
               watermarkText="IMPACT"
             />
 

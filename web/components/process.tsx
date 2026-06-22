@@ -73,7 +73,7 @@ export function Process() {
               <span className="text-google-blue">clarity</span>.
             </>
           }
-          description="From the first call to the final launch — and optional ongoing maintenance — every stage keeps timelines realistic and expectations aligned."
+          description="From the first call to the final launch and optional ongoing maintenance; every stage keeps timelines realistic and expectations aligned."
           watermarkText="PROCESS"
         />
 

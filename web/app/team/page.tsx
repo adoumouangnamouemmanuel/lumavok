@@ -49,7 +49,7 @@ const team: TeamMember[] = [
   {
     name: 'Soaliyé Banyoua Kindo',
     role: 'Lead Engineer',
-    country: 'Chad',
+    country: 'Niger',
     email: 'soaliye@lumavok.com',
     linkedin: 'https://linkedin.com/in/',
     portfolio: '#',
@@ -60,7 +60,7 @@ const team: TeamMember[] = [
   {
     name: 'Clément Sampebgo',
     role: 'Database Administrator',
-    country: 'Chad',
+    country: 'Burkina Faso',
     email: 'clement@lumavok.com',
     linkedin: 'https://linkedin.com/in/',
     portfolio: '#',
@@ -71,7 +71,7 @@ const team: TeamMember[] = [
   {
     name: 'Tomoh Claude',
     role: 'Content & Social Media',
-    country: 'Chad',
+    country: 'Cameroon',
     email: 'claude@lumavok.com',
     linkedin: 'https://linkedin.com/in/',
     portfolio: '#',
@@ -82,7 +82,7 @@ const team: TeamMember[] = [
   {
     name: 'Ramatou Salah Hassane',
     role: 'Media & Communications',
-    country: 'Chad',
+    country: 'Niger',
     email: 'ramatou@lumavok.com',
     linkedin: 'https://linkedin.com/in/',
     portfolio: '#',
@@ -93,7 +93,7 @@ const team: TeamMember[] = [
   {
     name: 'Karimou N\u2019Goila Abdoul-Akim',
     role: 'Multimedia Producer',
-    country: 'Chad',
+    country: 'Niger',
     email: 'karimou@lumavok.com',
     linkedin: 'https://linkedin.com/in/',
     portfolio: '#',

@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 const points = [
   {
     title: 'Contextual by design',
-    desc: 'We design from the inside out — factoring in local payment systems, infrastructure, languages, and business behaviors.',
+    desc: 'We design from the inside out; factoring in local payment systems, infrastructure, languages, and business behaviors.',
     color: 'text-google-blue',
   },
   {
@@ -18,12 +18,12 @@ const points = [
   },
   {
     title: 'End-to-end ecosystem',
-    desc: 'One partner from ideation to deployment to marketing — less cost, less friction, fewer failures.',
+    desc: 'One partner from ideation to deployment to marketing; less cost, less friction, fewer failures.',
     color: 'text-google-yellow',
   },
   {
     title: 'Youth-led, Africa-first',
-    desc: 'Built by young Africans who understand the continent from the inside — an advantage no outside provider can replicate.',
+    desc: 'Built by young Africans who understand the continent from the inside an advantage no outside provider can replicate.',
     color: 'text-google-red',
   },
 ]

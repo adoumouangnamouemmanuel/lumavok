@@ -46,7 +46,7 @@ export function Contact() {
               Tell us about your <span className="text-google-green">project</span>.
             </>
           }
-          description="Every project begins with a free consultation. No jargon, no pressure — just a clear conversation about what we can achieve together."
+          description="Every project begins with a free consultation. No jargon, no pressure; just a clear conversation about what we can achieve together."
           watermarkText="CONTACT"
         />
 
@@ -65,7 +65,7 @@ export function Contact() {
                     <Check className="size-8" />
                   </span>
                   <h3 className="mt-6 text-2xl font-bold tracking-tight">
-                    Thank you — message received.
+                    Thank you; message received.
                   </h3>
                   <p className="mt-3 text-muted-foreground">
                     Our team will be in touch within one business day to schedule
@@ -130,14 +130,14 @@ export function Contact() {
               {/* Google Map */}
               <div className="overflow-hidden rounded-2xl border border-border shadow-lg">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254434.5601923685!2d14.896042149999998!3d12.10671985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x111472e74c27a697%3A0x25aa72e0dcc329dd!2sN&#39;Djamena%2C%20Chad!5e0!3m2!1sen!2s!4v1719064800000"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254434.5601923685!2d-0.2004797!3d5.606137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xf14676e1b27cd3d%3A0x1e5575b2f1b9c9a5!2sAccra%2C%20Ghana!5e0!3m2!1sen!2s!4v1753356757200!5m2!1sen!2s"
                   width="100%"
                   height="280"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Lumavok Office Location; N'Djamena, Chad"
+                  title="Lumavok Office Location; Accra, Ghana"
                   className="w-full"
                 />
               </div>
@@ -154,14 +154,14 @@ export function Contact() {
                 <ContactCard
                   icon={Phone}
                   label="Call us"
-                  value="+235 XX XX XX XX"
-                  href="tel:+235XXXXXXXX"
+                  value="+233503673195"
+                  href="tel:+233503673195"
                   color="bg-google-green/10 text-google-green"
                 />
                 <ContactCard
                   icon={MapPin}
                   label="Visit us"
-                  value="N'Djamena, Chad"
+                  value="Accra, Ghana"
                   color="bg-google-red/10 text-google-red"
                 />
               </div>
