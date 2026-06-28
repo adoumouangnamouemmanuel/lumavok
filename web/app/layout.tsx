@@ -1,22 +1,31 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Poppins } from 'next/font/google'
+import { Archivo, Newsreader } from 'next/font/google'
 import './globals.css'
 
-const poppins = Poppins({
-  variable: '--font-poppins',
+const archivo = Archivo({
+  variable: '--font-archivo',
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+})
+
+const newsreader = Newsreader({
+  variable: '--font-newsreader',
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+  weight: ['300', '400', '500'],
 })
 
 export const metadata: Metadata = {
-  title: 'Lumavok — Local Solutions. Global Standards.',
+  title: 'Lumavok — Des solutions locales, des standards mondiaux',
   description:
-    'Lumavok is a youth-led African technology studio building software, AI & machine learning, design, and digital systems — crafted for the African market at global standards.',
+    'Lumavok est un studio technologique africain porté par la jeunesse. Nous concevons des sites web, des applications, des systèmes d’IA et des produits numériques qui relient les personnes, les idées et les opportunités.',
+  generator: 'v0.app',
 }
 
 export const viewport: Viewport = {
-  themeColor: '#ffffff',
+  colorScheme: 'dark',
+  themeColor: '#121212',
 }
 
 export default function RootLayout({
@@ -25,7 +34,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`light ${poppins.variable} bg-background`}>
+    <html
+      lang="fr"
+      className={`${archivo.variable} ${newsreader.variable} bg-background`}
+    >
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
