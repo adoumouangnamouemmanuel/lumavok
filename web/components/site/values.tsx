@@ -137,10 +137,10 @@ function ProgressDots({ progress }: { progress: MotionValue<number> }) {
           progress,
           [start - 0.001, start, end, end + 0.001],
           [
-            'oklch(1 0 0 / 15%)',
-            'oklch(0.78 0.09 200)',
-            'oklch(0.78 0.09 200)',
-            'oklch(1 0 0 / 15%)',
+            'rgba(255, 255, 255, 0.15)',
+            'hsla(191, 40%, 60%, 1)',
+            'hsla(191, 40%, 60%, 1)',
+            'rgba(255, 255, 255, 0.15)',
           ],
         )
         return (

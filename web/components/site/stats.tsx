@@ -146,7 +146,7 @@ export function Stats() {
                 height: active === i ? 48 : 20,
                 opacity: active === i ? 1 : 0.4,
                 backgroundColor:
-                  active === i ? 'var(--accent)' : 'var(--foreground)',
+                  active === i ? 'hsla(191, 40%, 60%, 1)' : 'rgba(240, 239, 236, 1)',
               }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="w-px"

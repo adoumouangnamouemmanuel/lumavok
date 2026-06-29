@@ -173,10 +173,10 @@ export function Footer() {
       {/* Oversized wordmark — visible, hugging the bottom edge */}
       <motion.div
         style={{ y: wordY }}
-        className="pointer-events-none -mb-[2vw] select-none px-4"
+        className="pointer-events-none -mb-[1.5vw] flex w-full select-none justify-center overflow-hidden"
         aria-hidden="true"
       >
-        <h2 className="heading-tight bg-gradient-to-b from-foreground/30 via-foreground/10 to-transparent bg-clip-text text-center text-[22vw] uppercase leading-[0.78] text-transparent">
+        <h2 className="whitespace-nowrap bg-gradient-to-b from-foreground/30 via-foreground/10 to-transparent bg-clip-text text-center text-[17vw] font-extrabold uppercase leading-[0.8] tracking-[-0.03em] text-transparent">
           Lumavok
         </h2>
       </motion.div>
