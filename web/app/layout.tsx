@@ -4,6 +4,7 @@ import { Archivo, Newsreader } from 'next/font/google'
 import './globals.css'
 import { Navbar } from '@/components/site/navbar'
 import { Footer } from '@/components/site/footer'
+import { ScrollToTop } from '@/components/site/scroll-to-top'
 
 const archivo = Archivo({
   variable: '--font-archivo',
@@ -45,6 +46,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <ScrollToTop />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

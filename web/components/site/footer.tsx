@@ -170,13 +170,6 @@ export function Footer() {
           <p className="font-mono uppercase tracking-wider">
             Local solutions, built to global standards.
           </p>
-          <Link
-            href="/#accueil"
-            className="group inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-foreground transition-colors hover:border-accent hover:text-accent"
-          >
-            Haut de page
-            <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
-          </Link>
         </div>
       </div>
 
