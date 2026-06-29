@@ -11,7 +11,6 @@ const links = [
   { label: 'Méthode', href: '/#processus' },
   { label: 'Tarifs', href: '/#tarifs' },
   { label: 'Équipe', href: '/#equipe' },
-  { label: 'Témoignages', href: '/#temoignages' },
 ]
 
 function Logo() {

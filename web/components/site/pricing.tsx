@@ -132,7 +132,7 @@ export function Pricing() {
                     className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent/25 blur-3xl"
                   />
                   <span className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-accent px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-accent-foreground">
-                    <Sparkles className="h-3 w-3" />
+                    {/* <Sparkles className="h-3 w-3" /> */}
                     Populaire
                   </span>
                 </>

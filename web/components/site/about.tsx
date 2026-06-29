@@ -92,7 +92,7 @@ export function About() {
             className="absolute -left-4 bottom-10 hidden rounded-xl border border-border bg-card/80 px-4 py-3 backdrop-blur-md md:block"
           >
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-              Depuis 2024
+              Depuis 2026
             </p>
             <p className="text-sm font-semibold text-foreground">
               Conçu en Afrique

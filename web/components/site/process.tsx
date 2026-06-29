@@ -15,7 +15,7 @@ const steps: Step[] = [
     num: '01',
     tag: 'Gratuit',
     title: 'Consultation initiale',
-    text: 'Chaque projet commence par un échange où nous écoutons vos objectifs, vos défis et votre vision — avant même de parler de budget.',
+    text: 'Chaque projet commence par un échange où nous écoutons vos objectifs, vos défis et votre vision; avant même de parler de budget.',
   },
   {
     num: '02',
@@ -27,7 +27,7 @@ const steps: Step[] = [
     num: '03',
     tag: 'Design',
     title: 'Phase de design (UI/UX)',
-    text: 'Nous traduisons votre vision en concepts visuels — wireframes et prototypes interactifs — affinés ensemble avant tout développement.',
+    text: 'Nous traduisons votre vision en concepts visuels, wireframes et prototypes interactifs, affinés ensemble avant tout développement.',
   },
   {
     num: '04',

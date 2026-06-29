@@ -15,26 +15,42 @@ type Stat = {
   suffix?: string
   label: string[]
   blurb: string
+  countries?: { name: string; code: string }[]
+  expertise?: string[]
 }
 
 const stats: Stat[] = [
   {
-    value: 50,
+    value: 10,
     suffix: '+',
     label: ['Projets', 'livrés'],
     blurb: 'Des sites, apps et systèmes mis en production à travers le continent.',
   },
   {
     value: 6,
-    suffix: '',
     label: ['Domaines', 'd’expertise'],
     blurb: 'Du développement logiciel à l’IA, en passant par le design et le SaaS.',
+    expertise: [
+      'Développement Web',
+      'Intelligence Artificielle',
+      'Design UI/UX',
+      'Applications Mobiles',
+      'Plateformes SaaS',
+      'Architecture & Data',
+    ],
   },
   {
-    value: 12,
+    value: 5,
     suffix: '+',
     label: ['Pays', 'servis'],
     blurb: 'Des solutions locales, livrées selon des standards mondiaux.',
+    countries: [
+      { name: 'Tchad', code: 'td' },
+      { name: 'Burkina-Faso', code: 'bf' },
+      { name: 'Niger', code: 'ne' },
+      { name: 'Cameroun', code: 'cm' },
+      { name: 'Ghana', code: 'gh' },
+    ],
   },
 ]
 
@@ -106,6 +122,31 @@ function Panel({
           <p className="mt-6 max-w-md font-serif text-lg font-light italic leading-relaxed text-foreground/75 md:text-xl">
             {stat.blurb}
           </p>
+          {stat.countries && (
+            <div className="mt-8 flex flex-wrap gap-4">
+              {stat.countries.map((country) => (
+                <div
+                  key={country.name}
+                  className="flex items-center gap-2.5 rounded-full border border-border bg-card/40 px-4 py-2 backdrop-blur-sm"
+                >
+                  <img src={`https://flagcdn.com/${country.code}.svg`} alt={`Drapeau ${country.name}`} className="w-5 h-3.5 object-cover rounded-sm shadow-sm" />
+                  <span className="text-sm font-medium uppercase tracking-wider text-foreground/80">{country.name}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          {stat.expertise && (
+            <div className="mt-8 flex flex-wrap gap-3">
+              {stat.expertise.map((exp) => (
+                <div
+                  key={exp}
+                  className="rounded-full border border-border bg-card/40 px-4 py-2 text-sm font-medium uppercase tracking-wider text-foreground/80 backdrop-blur-sm"
+                >
+                  {exp}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </motion.div>
     </motion.div>
