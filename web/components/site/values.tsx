@@ -53,12 +53,10 @@ const values: Value[] = [
   {
     num: '06',
     title: 'Autonomisation',
-    text: 'Nos outils aident nos clients à croître — dans les affaires, l’éducation et la vie communautaire.',
+    text: 'Nos outils aident nos clients à croître — dans les affaires, l\u2019éducation et la vie communautaire.',
     Icon: HandHeart,
   },
 ]
-
-const ease = [0.22, 1, 0.36, 1] as const
 
 function ValueCard({
   value,
@@ -72,85 +70,39 @@ function ValueCard({
   progress: MotionValue<number>
 }) {
   const { Icon } = value
-  const isFirst = index === 0
-  const isLast = index === total - 1
-  // Each card owns a slice of the scroll timeline (strictly increasing, 0..1).
-  const a = (index - 1) / total // previous slice
-  const b = index / total // this card settled
-  const c = (index + 1) / total // next card covers it
-  const mid = (a + b) / 2
 
-  // Card rises from below and settles; the first one is already in place.
-  const y = useTransform(
-    progress,
-    isFirst ? [0, 1] : [a, b],
-    isFirst ? ['0%', '0%'] : ['65%', '0%'],
-  )
-  const opacity = useTransform(
-    progress,
-    isFirst ? [0, 1] : [a, mid, b],
-    isFirst ? [1, 1] : [0, 0.5, 1],
-  )
-  // Cards underneath shrink slightly and dim as the next stacks over them.
-  const scale = useTransform(progress, [b, c], isLast ? [1, 1] : [1, 0.93])
-  const dim = useTransform(progress, [b, c], isLast ? [0, 0] : [0, 0.55])
+  // Same stacking logic as Process: each card scales down as scroll progresses
+  const start = index / total
+  const scale = useTransform(progress, [start, 1], [1, 1 - (total - index) * 0.045])
+  const y = useTransform(progress, [start, 1], [0, -index * 8])
 
   return (
-    <motion.article
-      style={{ y, opacity, scale, zIndex: index + 1 }}
-      className="absolute inset-x-0 top-0 mx-auto flex w-full max-w-3xl flex-col gap-5 overflow-hidden rounded-3xl border border-border bg-card p-7 shadow-[0_30px_90px_-30px_rgba(0,0,0,0.85)] sm:p-10 md:flex-row md:items-start md:gap-8"
+    <div
+      className="sticky"
+      style={{ top: `calc(14vh + ${index * 28}px)`, zIndex: index }}
     >
-      {/* progressive dimming layer for stacked-under cards */}
-      <motion.div
-        aria-hidden="true"
-        style={{ opacity: dim }}
-        className="pointer-events-none absolute inset-0 rounded-3xl bg-background"
-      />
-      <div className="relative flex items-center justify-between md:flex-col md:items-start md:gap-6">
-        <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-secondary text-accent">
-          <Icon className="h-7 w-7" strokeWidth={1.6} />
-        </span>
-        <span className="font-serif text-3xl italic text-muted-foreground md:text-5xl">
-          {value.num}
-        </span>
-      </div>
-      <div className="relative flex-1">
-        <h3 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-          {value.title}
-        </h3>
-        <p className="mt-4 max-w-md text-pretty text-base leading-relaxed text-muted-foreground">
-          {value.text}
-        </p>
-      </div>
-    </motion.article>
-  )
-}
-
-function ProgressDots({ progress }: { progress: MotionValue<number> }) {
-  return (
-    <div className="flex flex-col gap-2">
-      {values.map((v, i) => {
-        const start = i / values.length
-        const end = (i + 1) / values.length
-        const h = useTransform(progress, [start, end], [12, 40])
-        const bg = useTransform(
-          progress,
-          [start - 0.001, start, end, end + 0.001],
-          [
-            'rgba(255, 255, 255, 0.15)',
-            'hsla(191, 40%, 60%, 1)',
-            'hsla(191, 40%, 60%, 1)',
-            'rgba(255, 255, 255, 0.15)',
-          ],
-        )
-        return (
-          <motion.span
-            key={v.num}
-            style={{ height: h, backgroundColor: bg }}
-            className="w-1 rounded-full"
-          />
-        )
-      })}
+      <motion.article
+        style={{ scale, y }}
+        className="mx-auto flex min-h-[36vh] max-w-4xl flex-col justify-between overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[0_-20px_60px_-30px_rgba(0,0,0,0.8)] md:min-h-[40vh] md:p-12"
+      >
+        <div className="flex items-start justify-between gap-6">
+          <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-secondary text-accent">
+            <Icon className="h-7 w-7" strokeWidth={1.6} />
+          </span>
+          <span className="heading-tight text-6xl leading-none text-foreground/10 md:text-8xl">
+            {value.num}
+          </span>
+        </div>
+        <div className="mt-8">
+          <h3 className="text-balance text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+            {value.title}
+          </h3>
+          <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+            {value.text}
+          </p>
+        </div>
+        <div className="mt-8 h-px w-full bg-gradient-to-r from-accent/60 via-border to-transparent" />
+      </motion.article>
     </div>
   )
 }
@@ -161,44 +113,45 @@ export function Values() {
     target: ref,
     offset: ['start start', 'end end'],
   })
+  const lineWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
 
   return (
-    <section ref={ref} className="relative bg-background" style={{ height: `${values.length * 90}vh` }}>
-      <div className="sticky top-0 flex h-[100svh] flex-col overflow-hidden">
-        <div className="mx-auto w-full max-w-7xl px-6 pt-24 md:pt-28">
+    <section ref={ref} className="relative bg-background pb-[10vh]">
+      <div className="mx-auto max-w-7xl px-6 pt-28 md:pt-40">
+        <div className="flex flex-col gap-6">
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, ease }}
-            className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-accent"
+            transition={{ duration: 0.6 }}
+            className="font-mono text-xs uppercase tracking-[0.3em] text-accent"
           >
             {'// Ce qui nous guide'}
           </motion.p>
-          <h2 className="heading-tight text-balance text-4xl uppercase md:text-6xl">
+          <h2 className="heading-tight max-w-4xl text-balance text-4xl uppercase md:text-7xl">
             {'Nos '}
-            <span className="font-serif text-3xl font-light italic tracking-normal text-muted-foreground md:text-5xl">
+            <span className="font-serif text-3xl font-light italic tracking-normal text-muted-foreground md:text-6xl">
               valeurs
             </span>
           </h2>
+          <div className="relative mt-2 h-px w-full overflow-hidden bg-border">
+            <motion.div
+              style={{ width: lineWidth }}
+              className="absolute inset-y-0 left-0 bg-accent"
+            />
+          </div>
         </div>
 
-        {/* Stacked cards arena */}
-        <div className="relative mx-auto flex w-full max-w-7xl flex-1 items-center px-6">
-          <div className="hidden md:block md:pr-10">
-            <ProgressDots progress={scrollYProgress} />
-          </div>
-          <div className="relative mx-auto h-[300px] w-full max-w-3xl sm:h-[280px]">
-            {values.map((v, i) => (
-              <ValueCard
-                key={v.num}
-                value={v}
-                index={i}
-                total={values.length}
-                progress={scrollYProgress}
-              />
-            ))}
-          </div>
+        <div className="mt-16 pb-[20vh]">
+          {values.map((v, i) => (
+            <ValueCard
+              key={v.num}
+              value={v}
+              index={i}
+              total={values.length}
+              progress={scrollYProgress}
+            />
+          ))}
         </div>
       </div>
     </section>
