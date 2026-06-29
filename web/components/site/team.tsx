@@ -11,24 +11,24 @@ const members = [
     role: 'Cheffe de projet',
     img: '/images/dounia.webp',
     bio: 'Pilote la planification, l\u2019exécution et la livraison de chaque projet Lumavok, dans les délais et les standards de qualité.',
-    linkedin: '#',
-    email: '#',
+    linkedin: 'https://www.linkedin.com/in/deubaybe-dounia/',
+    email: 'successdouni.a@gmail.com',
   },
   {
     name: 'Emmanuel Adoum',
     role: 'Directeur Technique (CTO)',
     img: '/images/emma.webp',
     bio: 'Définit la vision technologique et veille à des produits sécurisés, évolutifs et toujours en avance sur les tendances.',
-    linkedin: '#',
-    email: '#',
+    linkedin: 'https://www.linkedin.com/in/emmanueladoum',
+    email: 'emmanuel.ouangnamou@gmail.com',
   },
   {
     name: 'Clement Sampebgo',
     role: 'Administrateur Base de données',
     img: '/images/clement.webp',
     bio: 'Conçoit et maintient des bases de données fiables, sécurisées et performantes pour chaque produit.',
-    linkedin: '#',
-    email: '#',
+    linkedin: 'https://www.linkedin.com/in/clement-sampebgo/',
+    email: 'cl.sampebgo@gmail.com',
   },
   {
     name: 'Soaliye Kindo Albert',
@@ -43,16 +43,16 @@ const members = [
     role: 'Responsable Contenu & Réseaux sociaux',
     img: '/images/claude.webp',
     bio: 'Crée et gère un contenu cohérent et engageant sur toutes nos plateformes en ligne.',
-    linkedin: '#',
-    email: '#',
+    linkedin: 'https://www.linkedin.com/in/claude-tomoh',
+    email: 'claudetomo20@gmail.com',
   },
   {
     name: 'Karimou N\u2019Goila Abdoul-Akim',
     role: 'Producteur Multimédia',
-    img: '/images/team8.png',
+    img: '/images/akim.webp',
     bio: 'Imagine, filme et monte les vidéos qui racontent l\u2019histoire et les projets de Lumavok.',
-    linkedin: '#',
-    email: '#',
+    linkedin: 'https://www.linkedin.com/in/abdoul-akim',
+    email: 'abdoul.akeem998@gmail.com',
   },
 ]
 
@@ -79,7 +79,7 @@ function MemberCard({ m, index }: { m: (typeof members)[number]; index: number }
           alt={`Portrait de ${m.name}`}
           fill
           sizes="(max-width: 640px) 270px, 320px"
-          className="object-cover grayscale transition-[filter] duration-700 group-hover:grayscale-0"
+          className="object-cover transition-transform duration-700"
           loading={index < 2 ? 'eager' : 'lazy'}
           quality={80}
         />

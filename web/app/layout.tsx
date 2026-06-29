@@ -2,6 +2,8 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Archivo, Newsreader } from 'next/font/google'
 import './globals.css'
+import { Navbar } from '@/components/site/navbar'
+import { Footer } from '@/components/site/footer'
 
 const archivo = Archivo({
   variable: '--font-archivo',
@@ -37,9 +39,12 @@ export default function RootLayout({
     <html
       lang="fr"
       className={`${archivo.variable} ${newsreader.variable} bg-background`}
+      data-scroll-behavior="smooth"
     >
       <body className="font-sans antialiased">
+        <Navbar />
         {children}
+        <Footer />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

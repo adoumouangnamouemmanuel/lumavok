@@ -1,9 +1,9 @@
-import { Navbar } from "@/components/site/navbar"
 import { Hero } from "@/components/site/hero"
 import { Intro } from "@/components/site/intro"
 import { Gallery } from "@/components/site/gallery"
 import { About } from "@/components/site/about"
 import { Services } from "@/components/site/services"
+import { FeaturedProjects } from "@/components/site/featured-projects"
 import { Process } from "@/components/site/process"
 import { Pricing } from "@/components/site/pricing"
 import { Stats } from "@/components/site/stats"
@@ -11,7 +11,6 @@ import { Values } from "@/components/site/values"
 import { Team } from "@/components/site/team"
 import { Testimonials } from "@/components/site/testimonials"
 import { Contact } from "@/components/site/contact"
-import { Footer } from "@/components/site/footer"
 
 /** Normal-flow sections rise over the previous one with a rounded lip + shadow. */
 function Cover({
@@ -49,7 +48,6 @@ function Stack({
 export default function Page() {
   return (
     <main className="relative">
-      <Navbar />
       <Stack z={0}>
         <Hero />
       </Stack>
@@ -65,6 +63,9 @@ export default function Page() {
       <Stack z={40}>
         <Services />
       </Stack>
+      <Cover z={45}>
+        <FeaturedProjects />
+      </Cover>
       <Stack z={50}>
         <Process />
       </Stack>
@@ -86,9 +87,7 @@ export default function Page() {
       <Cover z={110}>
         <Contact />
       </Cover>
-      <Stack z={120}>
-        <Footer />
-      </Stack>
+
     </main>
   )
 }

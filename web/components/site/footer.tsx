@@ -15,19 +15,19 @@ const cols = [
   {
     title: 'Studio',
     links: [
-      { label: 'À propos', href: '#a-propos' },
-      { label: 'Notre méthode', href: '#processus' },
-      { label: 'Nos valeurs', href: '#valeurs' },
-      { label: 'L’équipe', href: '#equipe' },
+      { label: 'À propos', href: '/#a-propos' },
+      { label: 'Notre méthode', href: '/#processus' },
+      { label: 'Nos valeurs', href: '/#valeurs' },
+      { label: 'L’équipe', href: '/#equipe' },
     ],
   },
   {
     title: 'Services',
     links: [
-      { label: 'Développement', href: '#services' },
-      { label: 'IA & Machine Learning', href: '#services' },
-      { label: 'UI / UX Design', href: '#services' },
-      { label: 'Tarifs', href: '#tarifs' },
+      { label: 'Développement', href: '/#services' },
+      { label: 'IA & Machine Learning', href: '/#services' },
+      { label: 'UI / UX Design', href: '/#services' },
+      { label: 'Tarifs', href: '/#tarifs' },
     ],
   },
 ]
@@ -102,7 +102,7 @@ export function Footer() {
         <div className="grid gap-12 py-14 md:grid-cols-[1.6fr_repeat(2,1fr)_1.2fr]">
           <div>
             <Link
-              href="#accueil"
+              href="/#accueil"
               className="flex items-center gap-2 text-2xl font-extrabold uppercase tracking-tight"
             >
               <span
@@ -170,13 +170,13 @@ export function Footer() {
           <p className="font-mono uppercase tracking-wider">
             Local solutions, built to global standards.
           </p>
-          <a
-            href="#accueil"
+          <Link
+            href="/#accueil"
             className="group inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-foreground transition-colors hover:border-accent hover:text-accent"
           >
             Haut de page
             <ArrowUp className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
-          </a>
+          </Link>
         </div>
       </div>
 
