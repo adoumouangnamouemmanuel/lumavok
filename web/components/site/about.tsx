@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
+import Image from 'next/image'
 import { useRef } from 'react'
 
 const words = [
@@ -65,12 +66,18 @@ export function About() {
             style={{ y: imgY, rotate: imgRotate }}
             className="relative overflow-hidden rounded-md [mask-image:radial-gradient(125%_125%_at_50%_42%,#000_52%,transparent_100%)]"
           >
-            <motion.img
+            <motion.div
               style={{ scale: imgScale }}
-              src="/images/about.png"
-              alt="Fondatrice du studio Lumavok"
-              className="aspect-[3/4] w-full object-cover will-change-transform md:aspect-[4/5]"
-            />
+              className="relative aspect-[3/4] w-full md:aspect-[4/5]"
+            >
+              <Image
+                src="/images/about.png"
+                alt="Fondatrice du studio Lumavok"
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-cover will-change-transform"
+              />
+            </motion.div>
             {/* Blend overlays so the photo melts into the page */}
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
             <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/20" />

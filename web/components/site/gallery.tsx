@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion'
+import Image from 'next/image'
 import { useRef } from 'react'
 
 const colA = ['/images/g1.png', '/images/g2.png', '/images/g6.png']
@@ -24,11 +25,15 @@ function Column({
           style={{ scale }}
           className="overflow-hidden rounded-md bg-card will-change-transform"
         >
-          <img
-            src={src || '/placeholder.svg'}
-            alt="Projet et savoir-faire Lumavok"
-            className="aspect-[4/5] w-full object-cover"
-          />
+          <div className="relative aspect-[4/5] w-full">
+            <Image
+              src={src}
+              alt="Projet et savoir-faire Lumavok"
+              fill
+              sizes="(max-width: 768px) 50vw, 33vw"
+              className="object-cover"
+            />
+          </div>
         </motion.div>
       ))}
     </motion.div>

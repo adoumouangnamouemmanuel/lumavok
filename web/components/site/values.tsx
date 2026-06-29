@@ -14,6 +14,7 @@ import { useRef } from 'react'
 
 type Value = {
   num: string
+  tag: string
   title: string
   text: string
   Icon: LucideIcon
@@ -22,38 +23,44 @@ type Value = {
 const values: Value[] = [
   {
     num: '01',
+    tag: 'Créativité',
     title: 'Innovation',
     text: 'Nous prototypons, testons et améliorons sans relâche pour repousser ce que la technologie peut faire.',
     Icon: Lightbulb,
   },
   {
     num: '02',
+    tag: 'Confiance',
     title: 'Intégrité',
     text: 'Nous communiquons avec clarté, tenons nos engagements et travaillons en toute transparence.',
     Icon: ShieldCheck,
   },
   {
     num: '03',
+    tag: 'Qualité',
     title: 'Excellence',
     text: 'Nous testons nos produits, affinons nos designs et documentons chaque étape de notre travail.',
     Icon: Sparkles,
   },
   {
     num: '04',
+    tag: 'Ensemble',
     title: 'Collaboration',
     text: 'Les meilleures solutions se construisent ensemble. Nous écoutons, co-créons et grandissons côte à côte.',
     Icon: Users,
   },
   {
     num: '05',
+    tag: 'Évolution',
     title: 'Adaptabilité',
     text: 'Nous évoluons avec les marchés et les technologies, ouverts au changement et aux retours.',
     Icon: Layers,
   },
   {
     num: '06',
+    tag: 'Impact',
     title: 'Autonomisation',
-    text: 'Nos outils aident nos clients à croître — dans les affaires, l\u2019éducation et la vie communautaire.',
+    text: 'Nos outils aident nos clients à croître \u2014 dans les affaires, l\u2019éducation et la vie communautaire.',
     Icon: HandHeart,
   },
 ]
@@ -86,17 +93,22 @@ function ValueCard({
         className="mx-auto flex min-h-[36vh] max-w-4xl flex-col justify-between overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[0_-20px_60px_-30px_rgba(0,0,0,0.8)] md:min-h-[40vh] md:p-12"
       >
         <div className="flex items-start justify-between gap-6">
-          <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-secondary text-accent">
-            <Icon className="h-7 w-7" strokeWidth={1.6} />
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
+            {value.tag}
           </span>
           <span className="heading-tight text-6xl leading-none text-foreground/10 md:text-8xl">
             {value.num}
           </span>
         </div>
         <div className="mt-8">
-          <h3 className="text-balance text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-            {value.title}
-          </h3>
+          <div className="flex items-center gap-4">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-secondary text-accent">
+              <Icon className="h-6 w-6" strokeWidth={1.6} />
+            </span>
+            <h3 className="text-balance text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+              {value.title}
+            </h3>
+          </div>
           <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
             {value.text}
           </p>

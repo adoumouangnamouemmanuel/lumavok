@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowUpRight, Check, Copy, Mail, Phone } from 'lucide-react'
+import Image from 'next/image'
 import { useRef, useState } from 'react'
 import { Marquee } from './marquee'
 
@@ -122,11 +123,12 @@ export function Contact() {
   return (
     <section id="contact" ref={ref} className="relative overflow-hidden">
       <motion.div style={{ scale: bgScale, y: bgY }} className="absolute inset-0">
-        <img
+        <Image
           src="/images/contact.png"
           alt=""
-          aria-hidden="true"
-          className="h-full w-full object-cover opacity-55"
+          fill
+          sizes="100vw"
+          className="object-cover opacity-55"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
       </motion.div>

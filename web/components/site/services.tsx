@@ -6,15 +6,8 @@ import {
   useSpring,
   useTransform,
 } from 'framer-motion'
-import {
-  Boxes,
-  BrainCircuit,
-  CodeXml,
-  LayoutTemplate,
-  Lightbulb,
-  Palette,
-  type LucideIcon,
-} from 'lucide-react'
+import { Boxes, BrainCircuit, CodeXml, LayoutTemplate, Lightbulb, Palette, type LucideIcon } from 'lucide-react'
+import Image from 'next/image'
 import { useRef, useState } from 'react'
 
 type Service = {
@@ -170,11 +163,12 @@ export function Services() {
           style={{ scale: bgScale, x: bgX }}
           className="absolute inset-0"
         >
-          <img
+          <Image
             src="/images/g6.png"
             alt=""
-            aria-hidden="true"
-            className="h-full w-full object-cover opacity-60"
+            fill
+            sizes="100vw"
+            className="object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/35 to-background/95" />
         </motion.div>
@@ -192,7 +186,7 @@ export function Services() {
         {/* Cards pass OVER the title */}
         <motion.div
           style={{ x }}
-          className="relative z-10 flex items-center gap-12 px-[10vw] sm:gap-16"
+          className="relative z-10 flex items-center gap-12 px-[10vw] will-change-transform sm:gap-16"
         >
           {services.map((s, i) => (
             <Card

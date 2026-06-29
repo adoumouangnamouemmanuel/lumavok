@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import Image from 'next/image'
 import { useRef, useState } from 'react'
 
 const quotes = [
@@ -60,11 +61,17 @@ export function Testimonials() {
   return (
     <section id="temoignages" className="relative overflow-hidden py-24 md:py-36">
       <div className="mx-auto max-w-7xl px-6">
-        <h2 className="heading-tight mb-14 text-5xl uppercase md:text-8xl">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="heading-tight mb-14 text-5xl uppercase md:text-8xl"
+        >
           Ils en parlent
           <br />
           <span className="text-muted-foreground">mieux que nous</span>
-        </h2>
+        </motion.h2>
 
         <div
           ref={areaRef}
@@ -79,10 +86,12 @@ export function Testimonials() {
               Suivant
             </p>
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg opacity-60 transition-opacity hover:opacity-90">
-              <img
-                src={quotes[nextIndex].img || '/placeholder.svg'}
+              <Image
+                src={quotes[nextIndex].img}
                 alt={`Portrait de ${quotes[nextIndex].name}`}
-                className="h-full w-full object-cover grayscale"
+                fill
+                sizes="25vw"
+                className="object-cover grayscale"
               />
             </div>
           </div>
@@ -101,10 +110,12 @@ export function Testimonials() {
                 className="grid grid-cols-1 items-center gap-8 sm:grid-cols-[auto_1fr]"
               >
                 <div className="relative aspect-[3/4] w-44 overflow-hidden rounded-lg sm:w-56">
-                  <img
-                    src={current.img || '/placeholder.svg'}
+                  <Image
+                    src={current.img}
                     alt={`Portrait de ${current.name}`}
-                    className="h-full w-full object-cover grayscale"
+                    fill
+                    sizes="(max-width: 640px) 176px, 224px"
+                    className="object-cover grayscale"
                   />
                 </div>
                 <div>

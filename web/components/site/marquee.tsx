@@ -28,7 +28,7 @@ export function Marquee({
   return (
     <div className={`relative w-full overflow-hidden ${className ?? ''}`}>
       <motion.div
-        className="flex w-max flex-nowrap"
+        className="flex w-max flex-nowrap will-change-transform"
         animate={{ x: reverse ? ['-50%', '0%'] : ['0%', '-50%'] }}
         transition={{ duration, ease: 'linear', repeat: Number.POSITIVE_INFINITY }}
       >

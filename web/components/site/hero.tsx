@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
+import Image from 'next/image'
 import { useRef } from 'react'
 import { Marquee } from './marquee'
 
@@ -26,10 +27,13 @@ export function Hero() {
         style={{ scale: imageScale, y: imageY }}
         className="absolute inset-0"
       >
-        <img
+        <Image
           src="/images/hero.png"
-          alt="L’équipe Lumavok collaborant dans un studio technologique"
-          className="h-full w-full object-cover"
+          alt="L'équipe Lumavok collaborant dans un studio technologique"
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/45 via-background/20 to-background/90" />
         <div className="absolute inset-0 bg-background/10" />

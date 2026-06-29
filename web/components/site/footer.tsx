@@ -57,15 +57,25 @@ export function Footer() {
         {/* Top: tagline + newsletter */}
         <div className="flex flex-col justify-between gap-10 border-b border-border pb-14 md:flex-row md:items-end">
           <div className="max-w-md">
-            <h2 className="text-balance text-3xl font-bold leading-tight tracking-tight text-foreground md:text-4xl">
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="text-balance text-3xl font-bold leading-tight tracking-tight text-foreground md:text-4xl"
+            >
               Construisons quelque chose qui compte.
-            </h2>
+            </motion.h2>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               Recevez nos idées sur la technologie, le design et l’innovation en
               Afrique — une fois par mois, sans bruit.
             </p>
           </div>
-          <form
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             onSubmit={(e) => {
               e.preventDefault()
               setSubscribed(true)
@@ -85,7 +95,7 @@ export function Footer() {
               {subscribed ? 'Merci !' : 'S’abonner'}
               <ArrowUpRight className="h-3.5 w-3.5" />
             </button>
-          </form>
+          </motion.form>
         </div>
 
         {/* Middle: brand + nav columns + socials */}
