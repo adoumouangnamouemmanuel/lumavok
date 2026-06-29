@@ -24,7 +24,7 @@ const services: Service[] = [
     title: 'Développement Logiciel',
     sub: 'Web · Mobile · Systèmes',
     insight:
-      'Sites, applications mobiles, e-commerce et systèmes de gestion sur mesure — pensés pour durer et passer à l’échelle.',
+      'Sites, applications mobiles, e-commerce et systèmes de gestion sur mesure; pensés pour durer et passer à l’échelle.',
     Icon: CodeXml,
   },
   {

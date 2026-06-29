@@ -113,7 +113,7 @@ export function Footer() {
             </Link>
             <p className="mt-5 max-w-xs text-pretty text-sm leading-relaxed text-muted-foreground">
               Studio technologique africain mené par la jeunesse. Sites web,
-              apps, systèmes IA et produits numériques — abordables, adaptables
+              apps, systèmes IA et produits numériques; abordables, adaptables
               et façonnés avec soin.
             </p>
             <a
