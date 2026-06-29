@@ -41,13 +41,13 @@ const members = [
   {
     name: 'Tomoh Claude',
     role: 'Responsable Contenu & Réseaux sociaux',
-    img: '/images/claude.webp',
+    img: '/images/tomoh.webp',
     bio: 'Crée et gère un contenu cohérent et engageant sur toutes nos plateformes en ligne.',
     linkedin: 'https://www.linkedin.com/in/claude-tomoh',
     email: 'claudetomo20@gmail.com',
   },
   {
-    name: 'Karimou N\u2019Goila Abdoul-Akim',
+    name: 'Abdoul-Akim N\u2019Goila',
     role: 'Producteur Multimédia',
     img: '/images/akim.webp',
     bio: 'Imagine, filme et monte les vidéos qui racontent l\u2019histoire et les projets de Lumavok.',
