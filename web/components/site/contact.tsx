@@ -6,8 +6,8 @@ import Image from 'next/image'
 import { useRef, useState } from 'react'
 import { Marquee } from './marquee'
 
-const EMAIL = 'hello@lumavok.com'
-const PHONE = '+221 77 000 00 00'
+const EMAIL = 'lumavok@gmail.com'
+const PHONE = '+233 50 367 3195'
 
 function CopyField({
   icon: Icon,
