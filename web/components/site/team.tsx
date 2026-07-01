@@ -33,10 +33,10 @@ const members = [
   {
     name: 'Soaliye Kindo Albert',
     role: 'Ingénieur principal',
-    img: '/images/team5.png',
-    bio: 'Guide la direction technique, garantit la qualité du code et l\u2019architecture de nos solutions.',
-    linkedin: '#',
-    email: '#',
+    img: '/images/soaliye.webp',
+    bio: 'Guide la direction technique, garantit la qualité du code et l’architecture de nos solutions.',
+    linkedin: 'https://www.linkedin.com/in/kindo-soaliye-albert/',
+    email: 'kindo.soaliye@gmail.com',
   },
   {
     name: 'Tomoh Claude',
