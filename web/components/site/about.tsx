@@ -71,7 +71,7 @@ export function About() {
               className="relative aspect-[3/4] w-full md:aspect-[4/5]"
             >
               <Image
-                src="/images/about.png"
+                src="/images/about.jpeg"
                 alt="Fondatrice du studio Lumavok"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"

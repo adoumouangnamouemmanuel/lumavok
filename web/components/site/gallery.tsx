@@ -4,9 +4,9 @@ import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion
 import Image from 'next/image'
 import { useRef } from 'react'
 
-const colA = ['/images/g1.png', '/images/g2.png', '/images/g6.png']
-const colB = ['/images/g3.png', '/images/g4.png', '/images/g1.png', '/images/g5.png']
-const colC = ['/images/g5.png', '/images/g6.png', '/images/g2.png']
+const colA = ['/images/g1.jpeg', '/images/g2.jpeg', '/images/g6.jpeg']
+const colB = ['/images/g3.jpeg', '/images/g4.jpeg', '/images/g1.jpeg', '/images/g5.jpeg']
+const colC = ['/images/g5.jpeg', '/images/g6.jpeg', '/images/g2.jpeg']
 
 function Column({
   images,

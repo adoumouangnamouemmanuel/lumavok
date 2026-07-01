@@ -164,7 +164,7 @@ export function Services() {
           className="absolute inset-0"
         >
           <Image
-            src="/images/g6.png"
+            src="/images/g6.jpeg"
             alt=""
             fill
             sizes="100vw"
