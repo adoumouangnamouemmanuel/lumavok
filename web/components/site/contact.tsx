@@ -8,7 +8,7 @@ import emailjs from '@emailjs/browser'
 import { useTranslations } from 'next-intl'
 import { Marquee } from './marquee'
 
-const EMAIL = 'lumavok@gmail.com'
+const EMAIL = 'hello@lumavok.com'
 const PHONE = '+233 50 367 3195'
 
 function CopyField({
