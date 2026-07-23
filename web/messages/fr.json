@@ -259,7 +259,9 @@
     "marquee": "Parlons-en"
   },
   "Footer": {
-    "tagline": "Construisons quelque chose qui compte.",
+    "tagline": "Construisons ensemble l'avenir de l'Afrique.",
+    "cta_desc": "Vous avez une idée ambitieuse ? Parlons-en et transformons-la en un produit numérique exceptionnel.",
+    "cta_btn": "Démarrer un projet",
     "newsletter_desc": "Recevez nos idées sur la technologie, le design et l’innovation en Afrique — une fois par mois, sans bruit.",
     "newsletter_placeholder": "Votre email",
     "newsletter_btn": "S'abonner",
