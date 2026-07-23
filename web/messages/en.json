@@ -259,7 +259,9 @@
     "marquee": "Let's talk"
   },
   "Footer": {
-    "tagline": "Let's build something that matters.",
+    "tagline": "Let's build the future of Africa together.",
+    "cta_desc": "Have an ambitious idea? Let's talk and turn it into an exceptional digital product.",
+    "cta_btn": "Start a project",
     "newsletter_desc": "Get our thoughts on tech, design, and innovation in Africa — once a month, no noise.",
     "newsletter_placeholder": "Your email",
     "newsletter_btn": "Subscribe",
