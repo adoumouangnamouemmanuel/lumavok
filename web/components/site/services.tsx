@@ -5,6 +5,7 @@ import { Boxes, BrainCircuit, CodeXml, LayoutTemplate, Lightbulb, Palette, X, ty
 import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
+import { createPortal } from 'react-dom'
 
 type Service = {
   num: string
@@ -128,6 +129,7 @@ export function Services() {
                   src={service.image}
                   alt={service.title}
                   fill
+                  priority={i === 0 || i === 1}
                   className="object-cover opacity-20 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-30"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
@@ -158,54 +160,73 @@ export function Services() {
       </div>
 
       {/* Expanded Modal */}
-      <AnimatePresence>
-        {selectedId && selectedService && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[250] bg-background/80 backdrop-blur-sm"
-              onClick={() => setSelectedId(null)}
-            />
-            
-            <div className="fixed inset-0 z-[251] flex items-center justify-center p-4 pointer-events-none md:p-10">
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {selectedId && selectedService && (
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center pointer-events-none p-4 md:p-10">
               <motion.div
+                key="backdrop"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-0 bg-background/80 backdrop-blur-sm pointer-events-auto"
+                onClick={() => setSelectedId(null)}
+              />
+              
+              <motion.div
+                key={`modal-${selectedService.num}`}
                 layoutId={`card-${selectedService.num}`}
-                className="pointer-events-auto relative flex w-full max-w-2xl flex-col overflow-hidden rounded-3xl bg-card shadow-2xl ring-1 ring-border"
+                className="pointer-events-auto relative z-10 flex w-full max-w-5xl max-h-[90vh] flex-col md:flex-row overflow-hidden rounded-[2rem] bg-card shadow-2xl ring-1 ring-border"
               >
-                {/* Image Cover */}
-                <div className="relative h-48 md:h-64 w-full">
+                {/* Left/Top Image Cover */}
+                <div className="relative h-56 w-full shrink-0 md:h-auto md:w-5/12">
                   <Image
                     src={selectedService.image}
                     alt={selectedService.title}
                     fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 40vw"
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent md:bg-gradient-to-r" />
                   
+                  {/* Mobile close button */}
                   <button
                     onClick={() => setSelectedId(null)}
-                    className="absolute right-6 top-6 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background/50 backdrop-blur-md transition-colors hover:bg-background"
+                    className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background/50 backdrop-blur-md transition-colors hover:bg-background md:hidden"
                   >
                     <X className="h-5 w-5 text-foreground" />
                   </button>
                 </div>
 
-                <div className="relative p-8 pt-0 md:p-12 md:pt-0">
-                  <motion.div layoutId={`icon-bg-${selectedService.num}`} className="relative -mt-8 mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-card ring-4 ring-background shadow-lg">
+                {/* Right/Bottom Content */}
+                <div className="relative flex flex-col overflow-y-auto p-8 pt-0 md:w-7/12 md:p-14">
+                  {/* Desktop close button */}
+                  <button
+                    onClick={() => setSelectedId(null)}
+                    className="absolute right-6 top-6 z-10 hidden h-10 w-10 items-center justify-center rounded-full bg-muted/50 transition-colors hover:bg-muted md:flex"
+                  >
+                    <X className="h-5 w-5 text-foreground" />
+                  </button>
+
+                  <motion.div 
+                    layoutId={`icon-bg-${selectedService.num}`} 
+                    className="relative -mt-8 mb-8 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-card shadow-lg ring-4 ring-background md:mt-0 md:bg-primary/10 md:shadow-none md:ring-0"
+                  >
                     <selectedService.Icon className="h-8 w-8 text-primary" strokeWidth={1.5} />
                   </motion.div>
 
-                  <motion.span layoutId={`num-${selectedService.num}`} className="font-serif text-sm italic text-muted-foreground">
-                    {selectedService.num}
-                  </motion.span>
-                  <motion.h3 layoutId={`title-${selectedService.num}`} className="mb-2 font-serif text-3xl italic leading-tight text-foreground md:text-5xl">
-                    {selectedService.title}
-                  </motion.h3>
-                  <motion.p layoutId={`sub-${selectedService.num}`} className="mb-8 text-sm font-medium uppercase tracking-widest text-primary">
-                    {selectedService.sub}
-                  </motion.p>
+                  <div className="flex flex-col">
+                    <motion.span layoutId={`num-${selectedService.num}`} className="font-serif text-sm italic text-muted-foreground">
+                      {selectedService.num}
+                    </motion.span>
+                    <motion.h3 layoutId={`title-${selectedService.num}`} className="mb-2 mt-1 font-serif text-3xl italic leading-tight text-foreground md:text-4xl lg:text-5xl">
+                      {selectedService.title}
+                    </motion.h3>
+                    <motion.p layoutId={`sub-${selectedService.num}`} className="mb-8 text-sm font-medium uppercase tracking-widest text-primary">
+                      {selectedService.sub}
+                    </motion.p>
+                  </div>
 
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -213,7 +234,7 @@ export function Services() {
                     transition={{ delay: 0.1, duration: 0.4 }}
                     className="flex flex-col gap-6"
                   >
-                    <p className="text-lg leading-relaxed text-foreground/90">
+                    <p className="text-lg leading-relaxed text-foreground/90 md:text-xl">
                       {selectedService.insight}
                     </p>
                     <div className="h-px w-full bg-border" />
@@ -224,9 +245,10 @@ export function Services() {
                 </div>
               </motion.div>
             </div>
-          </>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   )
 }
