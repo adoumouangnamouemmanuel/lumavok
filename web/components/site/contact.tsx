@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowUpRight, Check, Copy, Mail, Phone } from 'lucide-react'
 import Image from 'next/image'
 import { useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Marquee } from './marquee'
 
 const EMAIL = 'lumavok@gmail.com'
@@ -110,6 +111,7 @@ const labelClasses =
   'pointer-events-none absolute left-4 top-2 text-[10px] font-medium uppercase tracking-[0.15em] text-muted-foreground transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm peer-placeholder-shown:tracking-normal peer-placeholder-shown:normal-case peer-focus:top-2 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-[0.15em] peer-focus:text-primary'
 
 export function Contact() {
+  const t = useTranslations('Contact')
   const ref = useRef<HTMLElement>(null)
   const [sent, setSent] = useState(false)
   const { scrollYProgress } = useScroll({
@@ -143,7 +145,7 @@ export function Contact() {
         <motion.div
           animate={{ scale: [1, 1.18, 1], opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-          className="h-[60vmin] w-[60vmin] rounded-full bg-primary/5 dark:bg-primary/30 blur-[80px]"
+          className="h-[60vmin] w-[60vmin] rounded-full bg-transparent dark:bg-primary/30 blur-[80px]"
         />
       </motion.div>
 
@@ -155,10 +157,10 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="mb-6 text-center font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground"
         >
-          {'// Démarrons un projet'}
+          {t('subtitle')}
         </motion.p>
         <h2 className="heading-tight mx-auto max-w-4xl text-balance text-center text-5xl uppercase md:text-8xl">
-          {['Donnons', 'vie', 'à', 'votre'].map((w, i) => (
+          {(t.raw('title_words') as string[]).map((w, i) => (
             <motion.span
               key={i}
               initial={{ opacity: 0, y: 40 }}
@@ -181,7 +183,7 @@ export function Contact() {
             transition={{ duration: 0.7, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
             className="inline-block font-serif font-light italic tracking-normal text-primary"
           >
-            idée
+            {t('title_highlight')}
           </motion.span>
         </h2>
 
@@ -198,11 +200,10 @@ export function Contact() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="text-pretty font-serif text-lg font-light italic leading-relaxed text-foreground/80"
             >
-              Parlez-nous de votre projet. La première consultation est gratuite,
-              et nous revenons vers vous sous 24 heures — où que vous soyez.
+              {t('desc')}
             </motion.p>
             <CopyField icon={Mail} label="Email" value={EMAIL} delay={0.1} />
-            <CopyField icon={Phone} label="Téléphone" value={PHONE} delay={0.2} />
+            <CopyField icon={Phone} label={t('phone')} value={PHONE} delay={0.2} />
           </div>
 
           {/* Premium form, animates in on scroll */}
@@ -225,9 +226,9 @@ export function Contact() {
             <div className="flex flex-col gap-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Field index={0}>
-                  <input id="c-name" required placeholder="Nom" className={fieldClasses} />
+                  <input id="c-name" required placeholder={t('form_name')} className={fieldClasses} />
                   <label htmlFor="c-name" className={labelClasses}>
-                    Nom
+                    {t('form_name')}
                   </label>
                 </Field>
                 <Field index={1}>
@@ -246,11 +247,11 @@ export function Contact() {
               <Field index={2}>
                 <input
                   id="c-company"
-                  placeholder="Entreprise"
+                  placeholder={t('form_company')}
                   className={fieldClasses}
                 />
                 <label htmlFor="c-company" className={labelClasses}>
-                  Entreprise (optionnel)
+                  {t('form_company')}
                 </label>
               </Field>
               <Field index={3}>
@@ -258,11 +259,11 @@ export function Contact() {
                   id="c-msg"
                   required
                   rows={4}
-                  placeholder="Projet"
+                  placeholder={t('form_project')}
                   className={`${fieldClasses} resize-none`}
                 />
                 <label htmlFor="c-msg" className={labelClasses}>
-                  Parlez-nous de votre projet
+                  {t('form_project_label')}
                 </label>
               </Field>
               <Field index={4}>
@@ -279,7 +280,7 @@ export function Contact() {
                         animate={{ opacity: 1, y: 0 }}
                         className="inline-flex items-center gap-2"
                       >
-                        Message envoyé <Check className="h-4 w-4" />
+                        {t('form_sent')} <Check className="h-4 w-4" />
                       </motion.span>
                     ) : (
                       <motion.span
@@ -289,7 +290,7 @@ export function Contact() {
                         exit={{ opacity: 0, y: -10 }}
                         className="inline-flex items-center gap-2"
                       >
-                        Envoyer le message
+                        {t('form_send')}
                         <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                       </motion.span>
                     )}
@@ -305,7 +306,7 @@ export function Contact() {
         <Marquee
           duration={110}
           className="text-5xl md:text-8xl"
-          items={['Parlons-en', 'Lumavok', 'Parlons-en', 'Lumavok']}
+          items={[t('marquee'), 'Lumavok', t('marquee'), 'Lumavok']}
         />
       </div>
     </section>
