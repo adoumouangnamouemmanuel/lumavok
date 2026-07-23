@@ -4,31 +4,35 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
+import { useTranslations } from 'next-intl'
 
-const projects = [
-  {
-    id: '01',
-    title: 'Plateforme E-commerce B2B',
-    category: 'Web & Backend',
-    img: '/images/g1.png',
-  },
-  {
-    id: '02',
-    title: 'Application Fintech Sahel',
-    category: 'Mobile & UI/UX',
-    img: '/images/g3.png',
-  },
-  {
-    id: '03',
-    title: 'Système Logistique IA',
-    category: 'Intelligence Artificielle',
-    img: '/images/g5.png',
-  },
-]
+// projects array is moved inside component
 
 export function FeaturedProjects() {
+  const t = useTranslations('FeaturedProjects')
   const [hoveredIndex, setHoveredIndex] = useState(0)
+
+  const projects = [
+    {
+      id: '01',
+      title: t('p1_title'),
+      category: t('p1_category'),
+      img: '/images/g1.png',
+    },
+    {
+      id: '02',
+      title: t('p2_title'),
+      category: t('p2_category'),
+      img: '/images/g3.png',
+    },
+    {
+      id: '03',
+      title: t('p3_title'),
+      category: t('p3_category'),
+      img: '/images/g5.png',
+    },
+  ]
 
   return (
     <section className="relative bg-background py-24 md:py-36">
@@ -42,12 +46,12 @@ export function FeaturedProjects() {
               transition={{ duration: 0.6 }}
               className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground"
             >
-              {'// Nos Réalisations'}
+              {t('subtitle')}
             </motion.p>
             <h2 className="heading-tight max-w-2xl text-balance text-4xl uppercase md:text-6xl">
-              {'Projets '}
+              {t('title_1')}
               <span className="font-serif font-light italic tracking-normal text-muted-foreground">
-                Récents
+                {t('title_2')}
               </span>
             </h2>
           </div>
@@ -61,7 +65,7 @@ export function FeaturedProjects() {
               href="/projets"
               className="group inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold uppercase tracking-wider text-foreground transition-all hover:border-accent hover:bg-accent hover:text-accent-foreground"
             >
-              Voir tous les projets
+              {t('view_all')}
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Link>
           </motion.div>
