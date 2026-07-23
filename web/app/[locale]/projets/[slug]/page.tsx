@@ -207,7 +207,7 @@ export default function ProjectDetail() {
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {project.keyFeatures.map((feat, i) => (
                     <li key={i} className="rounded-2xl border border-border/50 bg-card/30 p-6 flex items-start gap-4">
-                      <div className="mt-1 h-2 w-2 rounded-full bg-accent shrink-0" />
+                      <div className="mt-1 h-2 w-2 rounded-full bg-primary shrink-0" />
                       <span className="text-lg text-foreground/90">{feat}</span>
                     </li>
                   ))}
@@ -222,10 +222,10 @@ export default function ProjectDetail() {
                 <div className="relative border-l border-border/50 ml-4 pl-8 flex flex-col gap-12">
                   {project.developmentProcess.map((step, i) => (
                     <div key={i} className="relative">
-                      <div className="absolute -left-[41px] flex h-5 w-5 items-center justify-center rounded-full bg-background border border-accent">
-                        <div className="h-2 w-2 rounded-full bg-accent" />
+                      <div className="absolute -left-[41px] flex h-5 w-5 items-center justify-center rounded-full bg-background border border-primary">
+                        <div className="h-2 w-2 rounded-full bg-primary" />
                       </div>
-                      <h4 className="font-mono text-sm uppercase tracking-widest text-accent mb-2">Phase 0{i + 1}</h4>
+                      <h4 className="font-mono text-sm uppercase tracking-widest text-primary mb-2">Phase 0{i + 1}</h4>
                       <p className="text-lg text-muted-foreground">{step}</p>
                     </div>
                   ))}
@@ -240,7 +240,7 @@ export default function ProjectDetail() {
         <div className="mx-auto mt-32 max-w-7xl border-t border-border pt-16">
           <Link
             href="/projets"
-            className="group inline-flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-muted-foreground transition-colors hover:text-accent"
+            className="group inline-flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary"
           >
             <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-1" />
             Retour aux projets
