@@ -9,6 +9,7 @@ import {
   type MotionValue,
 } from 'framer-motion'
 import { useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 type Stat = {
   value: number
@@ -19,41 +20,7 @@ type Stat = {
   expertise?: string[]
 }
 
-const stats: Stat[] = [
-  {
-    value: 10,
-    suffix: '+',
-    label: ['Projets', 'livrés'],
-    blurb: 'Des sites, apps et systèmes mis en production à travers le continent.',
-  },
-  {
-    value: 6,
-    label: ['Domaines', 'd’expertise'],
-    blurb: 'Du développement logiciel à l’IA, en passant par le design et le SaaS.',
-    expertise: [
-      'Développement Web',
-      'Intelligence Artificielle',
-      'Design UI/UX',
-      'Applications Mobiles',
-      'Plateformes SaaS',
-      'Architecture & Data',
-    ],
-  },
-  {
-    value: 5,
-    suffix: '+',
-    label: ['Pays', 'servis'],
-    blurb: 'Des solutions locales, livrées selon des standards mondiaux.',
-    countries: [
-      { name: 'Tchad', code: 'td' },
-      { name: 'Burkina-Faso', code: 'bf' },
-      { name: 'Niger', code: 'ne' },
-      { name: 'Cameroun', code: 'cm' },
-      { name: 'Ghana', code: 'gh' },
-    ],
-  },
-]
-
+// stats array is moved inside component
 // Each panel rises to cover the previous one over a wide, smooth window.
 const windows: [number, number][] = [
   [0, 0.04],
@@ -64,10 +31,12 @@ const windows: [number, number][] = [
 function Panel({
   stat,
   index,
+  totalStats,
   progress,
 }: {
   stat: Stat
   index: number
+  totalStats: number
   progress: MotionValue<number>
 }) {
   const [win] = useState(windows[index])
@@ -87,7 +56,7 @@ function Panel({
     [coverEnd, Math.min(1, coverEnd + 0.18)],
     [1, 0.4],
   )
-  const isLast = index === stats.length - 1
+  const isLast = index === totalStats - 1
   const count = useTransform(progress, [win[0], win[1] + 0.08], [0, stat.value])
   const rounded = useTransform(
     count,
@@ -154,6 +123,7 @@ function Panel({
 }
 
 export function Stats() {
+  const t = useTranslations('Stats')
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -166,6 +136,28 @@ export function Stats() {
   })
   const [active, setActive] = useState(0)
 
+  const stats: Stat[] = [
+    {
+      value: 10,
+      suffix: '+',
+      label: [t('s1_label1'), t('s1_label2')],
+      blurb: t('s1_blurb'),
+    },
+    {
+      value: 6,
+      label: [t('s2_label1'), t('s2_label2')],
+      blurb: t('s2_blurb'),
+      expertise: t.raw('s2_expertise') as string[],
+    },
+    {
+      value: 5,
+      suffix: '+',
+      label: [t('s3_label1'), t('s3_label2')],
+      blurb: t('s3_blurb'),
+      countries: t.raw('s3_countries') as { name: string; code: string }[],
+    },
+  ]
+
   useMotionValueEvent(smooth, 'change', (v) => {
     const next = v < 0.39 ? 0 : v < 0.73 ? 1 : 2
     setActive(next)
@@ -175,7 +167,7 @@ export function Stats() {
     <section ref={ref} className="relative h-[340vh] bg-background">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         {stats.map((s, i) => (
-          <Panel key={i} stat={s} index={i} progress={smooth} />
+          <Panel key={i} stat={s} index={i} totalStats={stats.length} progress={smooth} />
         ))}
 
         {/* Progress bars indicating the active panel */}
