@@ -73,34 +73,23 @@ export function Footer() {
               {t('tagline')}
             </motion.h2>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              {t('newsletter_desc')}
+              {t('cta_desc')}
             </p>
           </div>
-          <motion.form
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            onSubmit={(e) => {
-              e.preventDefault()
-              setSubscribed(true)
-            }}
-            className="flex w-full max-w-sm items-center gap-2 rounded-full border border-border bg-card/60 p-1.5 pl-5 backdrop-blur-sm"
           >
-            <input
-              required
-              type="email"
-              placeholder={t('newsletter_placeholder')}
-              className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
-            />
-            <button
-              type="submit"
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-4 py-2.5 text-xs font-semibold text-primary-foreground transition-transform hover:scale-[1.03]"
+            <Link
+              href="/#contact"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/20"
             >
-              {subscribed ? t('newsletter_success') : t('newsletter_btn')}
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </button>
-          </motion.form>
+              {t('cta_btn')}
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </Link>
+          </motion.div>
         </div>
 
         {/* Middle: brand + nav columns + socials */}
