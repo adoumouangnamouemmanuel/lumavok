@@ -85,7 +85,7 @@ function MemberCard({ m, index }: { m: (typeof members)[number]; index: number }
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 dark:from-background dark:via-background/30 to-transparent" />
 
       <div className="relative mt-auto p-6">
         <h3 className="text-xl font-bold leading-tight text-foreground">
