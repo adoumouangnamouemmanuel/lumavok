@@ -5,6 +5,7 @@ import './globals.css'
 import { Navbar } from '@/components/site/navbar'
 import { Footer } from '@/components/site/footer'
 import { ScrollToTop } from '@/components/site/scroll-to-top'
+import { ThemeProvider } from '@/components/theme-provider'
 
 const archivo = Archivo({
   variable: '--font-archivo',
@@ -27,8 +28,10 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
-  themeColor: '#121212',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: '#22272e' },
+  ],
 }
 
 export default function RootLayout({
@@ -39,15 +42,23 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${archivo.variable} ${newsreader.variable} bg-background`}
+      className={`${archivo.variable} ${newsreader.variable}`}
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
     >
-      <body className="font-sans antialiased">
-        <Navbar />
-        {children}
-        <Footer />
-        <ScrollToTop />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+      <body className="font-sans antialiased bg-background text-foreground">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+          <Footer />
+          <ScrollToTop />
+          {process.env.NODE_ENV === 'production' && <Analytics />}
+        </ThemeProvider>
       </body>
     </html>
   )
