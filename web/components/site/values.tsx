@@ -93,7 +93,7 @@ function ValueCard({
         className="mx-auto flex min-h-[36vh] max-w-4xl flex-col justify-between overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[0_-20px_60px_-30px_rgba(0,0,0,0.8)] md:min-h-[40vh] md:p-12"
       >
         <div className="flex items-start justify-between gap-6">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
             {value.tag}
           </span>
           <span className="heading-tight text-6xl leading-none text-foreground/10 md:text-8xl">
@@ -102,7 +102,7 @@ function ValueCard({
         </div>
         <div className="mt-8">
           <div className="flex items-center gap-4">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-secondary text-accent">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-secondary text-primary">
               <Icon className="h-6 w-6" strokeWidth={1.6} />
             </span>
             <h3 className="text-balance text-3xl font-bold tracking-tight text-foreground md:text-5xl">
@@ -136,7 +136,7 @@ export function Values() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-mono text-xs uppercase tracking-[0.3em] text-accent"
+            className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground"
           >
             {'// Ce qui nous guide'}
           </motion.p>
