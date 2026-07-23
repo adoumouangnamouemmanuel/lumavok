@@ -3,9 +3,11 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { useRef } from 'react'
+import { useTranslations } from 'next-intl'
 import { Marquee } from './marquee'
 
 export function Hero() {
+  const t = useTranslations('Hero')
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -29,7 +31,7 @@ export function Hero() {
       >
         <Image
           src="/images/hero.png"
-          alt="L'équipe Lumavok collaborant dans un studio technologique"
+          alt={t('alt_img')}
           fill
           sizes="100vw"
           priority
@@ -44,7 +46,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2"
       >
         <Marquee
-          text="DES SOLUTIONS LOCALES · DES STANDARDS MONDIAUX"
+          text={t('marquee')}
           duration={150}
           className="text-[14vw] font-extrabold uppercase leading-none tracking-tight text-white/95 [font-stretch:expanded] dark:text-foreground/95"
         />
@@ -55,17 +57,15 @@ export function Hero() {
         className="absolute bottom-12 left-5 right-5 z-10 md:bottom-16 md:left-10 md:max-w-2xl"
       >
         <p className="font-serif text-2xl font-light leading-snug text-white/90 dark:text-foreground/90 md:text-4xl">
-          Que ce soit un <span className="italic">site web</span>, une{' '}
-          <span className="italic">application</span> ou un{' '}
-          <span className="italic">système d’IA</span> — nous transformons vos
-          idées en produits numériques qui relient les personnes, les idées et
-          les opportunités.
+          {t('text_1')}<span className="italic">{t('text_2')}</span>{t('text_3')}
+          <span className="italic">{t('text_4')}</span>{t('text_5')}
+          <span className="italic">{t('text_6')}</span>{t('text_7')}
         </p>
       </motion.div>
 
       <div className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex">
         <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/60 dark:text-muted-foreground">
-          Défiler
+          {t('scroll')}
         </span>
         <div className="h-10 w-px bg-gradient-to-b from-white/60 dark:from-foreground/60 to-transparent" />
       </div>
