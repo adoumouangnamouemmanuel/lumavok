@@ -44,10 +44,11 @@ function LanguageSwitcher({ isScrolled }: { isScrolled: boolean }) {
   const pathname = usePathname()
   const nextLocale = locale === 'fr' ? 'en' : 'fr'
 
+  // Using a standard <a> tag to force a hard navigation.
+  // This avoids a known React 19 / next-themes client-side navigation script error.
   return (
-    <Link
-      href={pathname}
-      locale={nextLocale}
+    <a
+      href={`/${nextLocale}${pathname === '/' ? '' : pathname}`}
       className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold transition-colors ${
         isScrolled
           ? 'bg-secondary text-foreground hover:bg-foreground hover:text-background'
@@ -55,7 +56,7 @@ function LanguageSwitcher({ isScrolled }: { isScrolled: boolean }) {
       }`}
     >
       {locale === 'fr' ? 'EN' : 'FR'}
-    </Link>
+    </a>
   )
 }
 
