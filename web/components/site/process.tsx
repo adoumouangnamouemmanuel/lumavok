@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion'
 import { useRef } from 'react'
+import { useTranslations } from 'next-intl'
 
 type Step = {
   num: string
@@ -10,45 +11,7 @@ type Step = {
   tag: string
 }
 
-const steps: Step[] = [
-  {
-    num: '01',
-    tag: 'Gratuit',
-    title: 'Consultation initiale',
-    text: 'Chaque projet commence par un échange où nous écoutons vos objectifs, vos défis et votre vision; avant même de parler de budget.',
-  },
-  {
-    num: '02',
-    tag: 'Cadrage',
-    title: 'Analyse & proposition',
-    text: 'Nous analysons vos objectifs en détail et préparons une proposition sur mesure : fonctionnalités, délais, technologies et estimation claire.',
-  },
-  {
-    num: '03',
-    tag: 'Design',
-    title: 'Phase de design (UI/UX)',
-    text: 'Nous traduisons votre vision en concepts visuels, wireframes et prototypes interactifs, affinés ensemble avant tout développement.',
-  },
-  {
-    num: '04',
-    tag: 'Build',
-    title: 'Développement',
-    text: 'Une fois les designs validés, nos développeurs leur donnent vie selon des standards modernes, avec documentation et points réguliers.',
-  },
-  {
-    num: '05',
-    tag: 'Qualité',
-    title: 'Tests & revue client',
-    text: 'Avant le lancement, le système passe plusieurs cycles de tests fonctionnels et d’usabilité. Vous validez chaque détail en avant-première.',
-  },
-  {
-    num: '06',
-    tag: 'Lancement',
-    title: 'Mise en ligne & formation',
-    text: 'Après votre approbation, nous déployons la solution et formons votre équipe pour qu’elle prenne le relais en toute confiance.',
-  },
-]
-
+// steps array is moved inside the component.
 function StepCard({
   step,
   index,
@@ -97,12 +60,22 @@ function StepCard({
 }
 
 export function Process() {
+  const t = useTranslations('Process')
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end end'],
   })
   const lineWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+
+  const steps: Step[] = [
+    { num: '01', tag: t('s1_tag'), title: t('s1_title'), text: t('s1_text') },
+    { num: '02', tag: t('s2_tag'), title: t('s2_title'), text: t('s2_text') },
+    { num: '03', tag: t('s3_tag'), title: t('s3_title'), text: t('s3_text') },
+    { num: '04', tag: t('s4_tag'), title: t('s4_title'), text: t('s4_text') },
+    { num: '05', tag: t('s5_tag'), title: t('s5_title'), text: t('s5_text') },
+    { num: '06', tag: t('s6_tag'), title: t('s6_title'), text: t('s6_text') },
+  ]
 
   return (
     <section id="processus" ref={ref} className="relative bg-background pb-[10vh]">
@@ -115,12 +88,12 @@ export function Process() {
             transition={{ duration: 0.6 }}
             className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground"
           >
-            {'// Notre méthode'}
+            {t('subtitle')}
           </motion.p>
           <h2 className="heading-tight max-w-4xl text-balance text-4xl uppercase md:text-7xl">
-            {'Du premier appel '}
+            {t('title_1')}
             <span className="font-serif text-3xl font-light italic tracking-normal text-muted-foreground md:text-6xl">
-              au lancement
+              {t('title_2')}
             </span>
           </h2>
           <div className="relative mt-2 h-px w-full overflow-hidden bg-border">
