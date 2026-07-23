@@ -40,7 +40,7 @@ export function FeaturedProjects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-accent"
+              className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground"
             >
               {'// Nos Réalisations'}
             </motion.p>
@@ -78,7 +78,7 @@ export function FeaturedProjects() {
                 className="group flex items-center justify-between border-b border-border/40 py-8 transition-colors hover:border-foreground md:py-12"
               >
                 <div className="flex flex-col gap-3">
-                  <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-accent">
+                  <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-primary">
                     {p.id} // {p.category}
                   </span>
                   <h3 className="text-3xl font-extrabold uppercase tracking-tight text-foreground/50 transition-all duration-500 group-hover:translate-x-4 group-hover:text-foreground md:text-4xl lg:text-5xl">
@@ -86,7 +86,7 @@ export function FeaturedProjects() {
                   </h3>
                 </div>
                 <div className="overflow-hidden">
-                  <ArrowUpRight className="h-8 w-8 -translate-x-8 text-accent opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100" />
+                  <ArrowUpRight className="h-8 w-8 -translate-x-8 text-primary opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100" />
                 </div>
               </Link>
             ))}
