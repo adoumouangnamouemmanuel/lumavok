@@ -119,7 +119,7 @@ export function Testimonials() {
                   />
                 </div>
                 <div>
-                  <span className="font-serif text-6xl leading-none text-accent">
+                  <span className="font-serif text-6xl leading-none text-muted-foreground">
                     {'\u201C'}
                   </span>
                   <blockquote className="-mt-4 text-pretty text-2xl font-light leading-snug md:text-3xl">
@@ -170,7 +170,7 @@ export function Testimonials() {
               <span
                 className={`block h-2 rounded-full transition-all ${
                   i === index
-                    ? 'w-8 bg-accent'
+                    ? 'w-8 bg-primary'
                     : 'w-2 bg-foreground/30 group-hover:bg-foreground/60'
                 }`}
               />
