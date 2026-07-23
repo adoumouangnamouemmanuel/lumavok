@@ -75,7 +75,7 @@ function StepCard({
         className="mx-auto flex min-h-[44vh] max-w-4xl flex-col justify-between overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[0_-20px_60px_-30px_rgba(0,0,0,0.8)] md:min-h-[48vh] md:p-12"
       >
         <div className="flex items-start justify-between gap-6">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
             {step.tag}
           </span>
           <span className="heading-tight text-6xl leading-none text-foreground/10 md:text-8xl">
@@ -113,7 +113,7 @@ export function Process() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-mono text-xs uppercase tracking-[0.3em] text-accent"
+            className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground"
           >
             {'// Notre méthode'}
           </motion.p>
