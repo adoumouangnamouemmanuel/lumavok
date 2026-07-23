@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Check, Sparkles } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 type Plan = {
   name: string
@@ -12,70 +13,49 @@ type Plan = {
   featured?: boolean
 }
 
-const plans: Plan[] = [
-  {
-    name: 'Starter',
-    desc: 'Pour les particuliers, étudiants et micro-entreprises qui lancent leur première identité en ligne.',
-    from: '$45',
-    to: "jusqu'à $199",
-    features: [
-      '1 à 3 pages',
-      'Design responsive',
-      'Formulaire de contact',
-      'SEO de base',
-    ],
-  },
-  {
-    name: 'Business',
-    desc: 'Pour les PME qui ont besoin d’une présence en ligne complète et professionnelle.',
-    from: '$180',
-    to: "jusqu'à $1 200",
-    featured: true,
-    features: [
-      '4 à 8 pages',
-      'Tableau de bord admin (option)',
-      'Identité de marque',
-      'Configuration SEO complète',
-    ],
-  },
-  {
-    name: 'E-Commerce',
-    desc: 'Pour vendre produits physiques ou numériques avec un paiement sécurisé.',
-    from: '$450',
-    to: 'jusqu’à $2 499+',
-    features: [
-      'Paiement intégré',
-      'Gestion de stock',
-      'Comptes clients',
-      'Gestion des commandes',
-    ],
-  },
-  {
-    name: 'Sur mesure',
-    desc: 'Plateformes taillées autour de workflows uniques et d’exigences avancées.',
-    from: '$1 400',
-    to: 'jusqu’à $5 000+',
-    features: [
-      'Analyse des besoins',
-      'Architecture personnalisée',
-      'Rôles & analytics',
-      'Support long terme',
-    ],
-  },
-]
-
-const addons = [
-  'Applications mobiles',
-  'UI / UX Design',
-  'Portfolios pro',
-  'Conseil & stratégie',
-  'Chatbots & IA',
-  'Maintenance',
-]
+// plans and addons are moved inside the component.
+// addons moved inside component
 
 const ease = [0.22, 1, 0.36, 1] as const
 
 export function Pricing() {
+  const t = useTranslations('Pricing')
+
+  const plans: Plan[] = [
+    {
+      name: t('plans.starter.name'),
+      desc: t('plans.starter.desc'),
+      from: t('plans.starter.from'),
+      to: t('plans.starter.to'),
+      features: t.raw('plans.starter.features') as string[],
+    },
+    {
+      name: t('plans.business.name'),
+      desc: t('plans.business.desc'),
+      from: t('plans.business.from'),
+      to: t('plans.business.to'),
+      featured: true,
+      features: t.raw('plans.business.features') as string[],
+    },
+    {
+      name: t('plans.ecommerce.name'),
+      desc: t('plans.ecommerce.desc'),
+      from: t('plans.ecommerce.from'),
+      to: t('plans.ecommerce.to'),
+      features: t.raw('plans.ecommerce.features') as string[],
+    },
+    {
+      name: t('plans.custom.name'),
+      desc: t('plans.custom.desc'),
+      from: t('plans.custom.from'),
+      to: t('plans.custom.to'),
+      features: t.raw('plans.custom.features') as string[],
+    },
+  ]
+
+  const addons = t.raw('addons') as string[]
+  const notes = t.raw('notes') as string[]
+
   return (
     <section id="tarifs" className="relative bg-background py-24 md:py-40">
       <div className="mx-auto max-w-7xl px-5 sm:px-6">
@@ -88,12 +68,12 @@ export function Pricing() {
               transition={{ duration: 0.6 }}
               className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground"
             >
-              {'// Tarifs transparents'}
+              {t('subtitle')}
             </motion.p>
             <h2 className="heading-tight max-w-3xl text-balance text-4xl uppercase sm:text-5xl md:text-7xl">
-              {'La qualité, '}
+              {t('title1')}
               <span className="font-serif text-3xl font-light italic tracking-normal text-muted-foreground sm:text-4xl md:text-6xl">
-                à portée de main
+                {t('title2')}
               </span>
             </h2>
           </div>
@@ -104,8 +84,7 @@ export function Pricing() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="max-w-sm text-pretty text-sm leading-relaxed text-muted-foreground"
           >
-            La valeur d’abord, des livrables clairs, des paliers adaptés à votre
-            budget. Le prix évolue uniquement avec la complexité du projet.
+            {t('desc')}
           </motion.p>
         </div>
 
@@ -133,7 +112,7 @@ export function Pricing() {
                   />
                   <span className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-primary-foreground">
                     {/* <Sparkles className="h-3 w-3" /> */}
-                    Populaire
+                    {t('popular')}
                   </span>
                 </>
               )}
@@ -146,7 +125,7 @@ export function Pricing() {
 
               <div className="mt-5 border-t border-border pt-5">
                 <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                  À partir de
+                  {t('from')}
                 </span>
                 <div className="mt-1 flex items-baseline gap-1.5">
                   <span className="text-4xl font-extrabold tracking-tight text-foreground">
@@ -181,7 +160,7 @@ export function Pricing() {
                     : 'bg-secondary text-foreground hover:bg-foreground hover:text-background'
                 }`}
               >
-                Demander un devis
+                {t('cta')}
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
             </motion.article>
@@ -198,7 +177,7 @@ export function Pricing() {
         >
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-              Aussi disponibles à la demande
+              {t('addons_title')}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {addons.map((a) => (
@@ -212,18 +191,12 @@ export function Pricing() {
             </div>
           </div>
           <div className="flex shrink-0 flex-col gap-2 text-xs text-muted-foreground">
-            <span className="inline-flex items-center gap-2">
-              <Check className="h-3.5 w-3.5 text-primary" />
-              Réduction étudiante de 20 %
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <Check className="h-3.5 w-3.5 text-primary" />
-              Crédit de parrainage de $10
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <Check className="h-3.5 w-3.5 text-primary" />
-              Paiement échelonné possible
-            </span>
+            {notes.map((note) => (
+              <span key={note} className="inline-flex items-center gap-2">
+                <Check className="h-3.5 w-3.5 text-primary" />
+                {note}
+              </span>
+            ))}
           </div>
         </motion.div>
       </div>
