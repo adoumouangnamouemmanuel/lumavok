@@ -91,7 +91,7 @@ export function About() {
             transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="absolute -left-4 bottom-10 hidden rounded-xl border border-border bg-card/80 px-4 py-3 backdrop-blur-md md:block"
           >
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               Depuis 2026
             </p>
             <p className="text-sm font-semibold text-foreground">
