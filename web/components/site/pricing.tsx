@@ -86,7 +86,7 @@ export function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-accent"
+              className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground"
             >
               {'// Tarifs transparents'}
             </motion.p>
@@ -167,7 +167,7 @@ export function Pricing() {
                         p.featured ? 'bg-accent/20' : 'bg-secondary'
                       }`}
                     >
-                      <Check className="h-3 w-3 text-accent" strokeWidth={3} />
+                      <Check className="h-3 w-3 text-primary" strokeWidth={3} />
                     </span>
                     {f}
                   </li>
@@ -197,7 +197,7 @@ export function Pricing() {
           className="mt-12 flex flex-col items-start gap-6 rounded-2xl border border-border bg-card/40 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between"
         >
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               Aussi disponibles à la demande
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -213,15 +213,15 @@ export function Pricing() {
           </div>
           <div className="flex shrink-0 flex-col gap-2 text-xs text-muted-foreground">
             <span className="inline-flex items-center gap-2">
-              <Check className="h-3.5 w-3.5 text-accent" />
+              <Check className="h-3.5 w-3.5 text-primary" />
               Réduction étudiante de 20 %
             </span>
             <span className="inline-flex items-center gap-2">
-              <Check className="h-3.5 w-3.5 text-accent" />
+              <Check className="h-3.5 w-3.5 text-primary" />
               Crédit de parrainage de $10
             </span>
             <span className="inline-flex items-center gap-2">
-              <Check className="h-3.5 w-3.5 text-accent" />
+              <Check className="h-3.5 w-3.5 text-primary" />
               Paiement échelonné possible
             </span>
           </div>
