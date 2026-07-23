@@ -35,8 +35,8 @@ export function Hero() {
           priority
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/45 via-background/20 to-background/90" />
-        <div className="absolute inset-0 bg-background/10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/20 to-background" />
+        <div className="absolute inset-0 bg-black/10" />
       </motion.div>
 
       <motion.div
@@ -46,7 +46,7 @@ export function Hero() {
         <Marquee
           text="DES SOLUTIONS LOCALES · DES STANDARDS MONDIAUX"
           duration={150}
-          className="text-[14vw] font-extrabold uppercase leading-none tracking-tight text-foreground/95 [font-stretch:expanded]"
+          className="text-[14vw] font-extrabold uppercase leading-none tracking-tight text-white/95 [font-stretch:expanded] dark:text-foreground/95"
         />
       </motion.div>
 
@@ -54,7 +54,7 @@ export function Hero() {
         style={{ y: textY }}
         className="absolute bottom-12 left-5 right-5 z-10 md:bottom-16 md:left-10 md:max-w-2xl"
       >
-        <p className="font-serif text-2xl font-light leading-snug text-foreground/90 md:text-4xl">
+        <p className="font-serif text-2xl font-light leading-snug text-white/90 dark:text-foreground/90 md:text-4xl">
           Que ce soit un <span className="italic">site web</span>, une{' '}
           <span className="italic">application</span> ou un{' '}
           <span className="italic">système d’IA</span> — nous transformons vos
@@ -64,10 +64,10 @@ export function Hero() {
       </motion.div>
 
       <div className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex">
-        <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-muted-foreground">
+        <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/60 dark:text-muted-foreground">
           Défiler
         </span>
-        <div className="h-10 w-px bg-gradient-to-b from-foreground/60 to-transparent" />
+        <div className="h-10 w-px bg-gradient-to-b from-white/60 dark:from-foreground/60 to-transparent" />
       </div>
     </section>
   )
