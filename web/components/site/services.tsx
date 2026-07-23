@@ -9,6 +9,7 @@ import {
 import { Boxes, BrainCircuit, CodeXml, LayoutTemplate, Lightbulb, Palette, type LucideIcon } from 'lucide-react'
 import Image from 'next/image'
 import { useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 type Service = {
   num: string
@@ -18,57 +19,7 @@ type Service = {
   Icon: LucideIcon
 }
 
-const services: Service[] = [
-  {
-    num: '01',
-    title: 'Développement Logiciel',
-    sub: 'Web · Mobile · Systèmes',
-    insight:
-      'Sites, applications mobiles, e-commerce et systèmes de gestion sur mesure; pensés pour durer et passer à l’échelle.',
-    Icon: CodeXml,
-  },
-  {
-    num: '02',
-    title: 'IA & Machine Learning',
-    sub: 'Automatisation intelligente',
-    insight:
-      'Chatbots, assistants et automatisations qui apprennent de vos données pour fluidifier vos opérations.',
-    Icon: BrainCircuit,
-  },
-  {
-    num: '03',
-    title: 'Design UI / UX',
-    sub: 'Conception centrée sur l’humain',
-    insight:
-      'Recherche utilisateur, wireframes et design systems pour des interfaces claires, accessibles et mémorables.',
-    Icon: Palette,
-  },
-  {
-    num: '04',
-    title: 'Création de Portfolio',
-    sub: 'Démarquez-vous en ligne',
-    insight:
-      'Portfolios académiques, CV web et vitrines numériques qui racontent votre histoire et inspirent confiance.',
-    Icon: LayoutTemplate,
-  },
-  {
-    num: '05',
-    title: 'Conseil & Stratégie',
-    sub: 'Une stratégie qui évolue',
-    insight:
-      'Choix technologiques, modernisation des systèmes et insights marché pour décider avec lucidité.',
-    Icon: Lightbulb,
-  },
-  {
-    num: '06',
-    title: 'Produits SaaS',
-    sub: 'Conçus pour l’échelle',
-    insight:
-      'Plateformes freemium et par abonnement, sécurisées et prêtes à grandir avec votre marché.',
-    Icon: Boxes,
-  },
-]
-
+// Services array is moved inside the component to use translations.
 // Gentle symmetric arc across the row — bigger dip at the edges.
 const arc = [
   { y: 64, rot: -6 },
@@ -136,12 +87,58 @@ function Card({
 }
 
 export function Services() {
+  const t = useTranslations('Services')
   const ref = useRef<HTMLElement>(null)
   const [hovered, setHovered] = useState<number | null>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end end'],
   })
+
+  const services: Service[] = [
+    {
+      num: '01',
+      title: t('s1_title'),
+      sub: t('s1_sub'),
+      insight: t('s1_insight'),
+      Icon: CodeXml,
+    },
+    {
+      num: '02',
+      title: t('s2_title'),
+      sub: t('s2_sub'),
+      insight: t('s2_insight'),
+      Icon: BrainCircuit,
+    },
+    {
+      num: '03',
+      title: t('s3_title'),
+      sub: t('s3_sub'),
+      insight: t('s3_insight'),
+      Icon: Palette,
+    },
+    {
+      num: '04',
+      title: t('s4_title'),
+      sub: t('s4_sub'),
+      insight: t('s4_insight'),
+      Icon: LayoutTemplate,
+    },
+    {
+      num: '05',
+      title: t('s5_title'),
+      sub: t('s5_sub'),
+      insight: t('s5_insight'),
+      Icon: Lightbulb,
+    },
+    {
+      num: '06',
+      title: t('s6_title'),
+      sub: t('s6_sub'),
+      insight: t('s6_insight'),
+      Icon: Boxes,
+    },
+  ]
 
   // Smooth the scroll so the row glides instead of tracking 1:1.
   const smooth = useSpring(scrollYProgress, {
@@ -176,10 +173,10 @@ export function Services() {
         {/* Title sits BEHIND the cards, lower on the screen */}
         <div className="pointer-events-none absolute inset-x-0 bottom-6 z-0 flex flex-col items-center md:bottom-10">
           <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.4em] text-muted-foreground md:text-xs">
-            {'// Ce que nous construisons'}
+            {t('subtitle')}
           </p>
           <h2 className="heading-tight text-[16vw] uppercase text-foreground/90 md:text-[12vw]">
-            Nos Services
+            {t('title')}
           </h2>
         </div>
 
