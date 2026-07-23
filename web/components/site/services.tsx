@@ -123,32 +123,31 @@ export function Services() {
               onClick={() => setSelectedId(service.num)}
               className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-3xl border border-border/40 bg-card p-6 shadow-xl transition-all hover:border-border/80 hover:shadow-2xl ${service.span} min-h-[300px] md:min-h-0`}
             >
-              {/* Background Image */}
-              <div className="absolute inset-0 z-0">
+              <div className="absolute inset-0 z-0 bg-black">
                 <Image
                   src={service.image}
                   alt={service.title}
                   fill
                   priority={i === 0 || i === 1}
-                  className="object-cover opacity-20 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-30"
+                  className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-80"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/90 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
               </div>
               
               <div className="relative z-10 flex h-full flex-col">
-                <motion.div layoutId={`icon-bg-${service.num}`} className="mb-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 backdrop-blur-md">
-                  <service.Icon className="h-7 w-7 text-primary" strokeWidth={1.5} />
+                <motion.div layoutId={`icon-bg-${service.num}`} className="mb-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-md">
+                  <service.Icon className="h-7 w-7 text-white" strokeWidth={1.5} />
                 </motion.div>
                 
-                <div className="mt-8 flex flex-col">
-                  <motion.span layoutId={`num-${service.num}`} className="font-serif text-sm italic text-muted-foreground">
+                <div className="mt-8 flex flex-col drop-shadow-md">
+                  <motion.span layoutId={`num-${service.num}`} className="font-serif text-sm italic text-white/70">
                     {service.num}
                   </motion.span>
-                  <motion.h3 layoutId={`title-${service.num}`} className="font-serif text-2xl italic leading-tight text-foreground md:text-3xl">
+                  <motion.h3 layoutId={`title-${service.num}`} className="font-serif text-2xl italic leading-tight text-white md:text-3xl">
                     {service.title}
                   </motion.h3>
-                  <motion.p layoutId={`sub-${service.num}`} className="mt-1 text-sm font-medium text-primary/80">
+                  <motion.p layoutId={`sub-${service.num}`} className="mt-1 text-sm font-medium text-white/90">
                     {service.sub}
                   </motion.p>
                 </div>
@@ -188,7 +187,6 @@ export function Services() {
                     sizes="(max-width: 768px) 100vw, 40vw"
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent md:bg-gradient-to-r" />
                   
                   {/* Mobile close button */}
                   <button
