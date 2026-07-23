@@ -147,8 +147,9 @@ export function Services() {
     restDelta: 0.001,
   })
 
-  // Cards start fully off-screen right (hidden) and the last exits left.
-  const x = useTransform(smooth, [0, 1], ['100%', '-118%'])
+  // Cards start fully off-screen right and exit left. 
+  // We use 100vw to start at the right edge of the screen, and -100% to move the entire width off the left edge.
+  const x = useTransform(smooth, [0, 1], ['100vw', '-100%'])
   // Background drifts and zooms throughout.
   const bgScale = useTransform(smooth, [0, 0.5, 1], [1.08, 1.2, 1.08])
   const bgX = useTransform(smooth, [0, 1], ['3%', '-3%'])
@@ -183,7 +184,7 @@ export function Services() {
         {/* Cards pass OVER the title */}
         <motion.div
           style={{ x }}
-          className="relative z-10 flex items-center gap-12 px-[10vw] will-change-transform sm:gap-16"
+          className="relative z-10 flex w-max items-center gap-12 px-[10vw] will-change-transform sm:gap-16"
         >
           {services.map((s, i) => (
             <Card
