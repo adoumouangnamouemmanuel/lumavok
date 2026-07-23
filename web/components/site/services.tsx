@@ -120,7 +120,7 @@ function Card({
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-card via-card to-card/85 p-5"
         >
-          <span className="font-serif text-sm italic text-accent">
+          <span className="font-serif text-sm italic text-muted-foreground">
             {service.num}
           </span>
           <h3 className="mt-1 font-serif text-xl italic leading-tight text-foreground">
@@ -175,7 +175,7 @@ export function Services() {
 
         {/* Title sits BEHIND the cards, lower on the screen */}
         <div className="pointer-events-none absolute inset-x-0 bottom-6 z-0 flex flex-col items-center md:bottom-10">
-          <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.4em] text-accent md:text-xs">
+          <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.4em] text-muted-foreground md:text-xs">
             {'// Ce que nous construisons'}
           </p>
           <h2 className="heading-tight text-[16vw] uppercase text-foreground/90 md:text-[12vw]">
