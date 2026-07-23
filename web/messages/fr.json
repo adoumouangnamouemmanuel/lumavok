@@ -252,6 +252,10 @@
     "form_project_label": "Parlez-nous de votre projet",
     "form_send": "Envoyer le message",
     "form_sent": "Message envoyé",
+    "form_success_title": "Message envoyé !",
+    "form_success_desc": "Nous avons bien reçu votre message et nous vous répondrons dans les plus brefs délais.",
+    "form_success_btn": "Envoyer un autre message",
+    "form_sending": "Envoi en cours...",
     "marquee": "Parlons-en"
   },
   "Footer": {
