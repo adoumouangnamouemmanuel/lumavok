@@ -2,13 +2,9 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
+import { useTranslations } from 'next-intl'
 
-const lines = [
-  { plain: 'Quand il est grand temps de ', em: 'passer à l’échelle', tail: '…' },
-  { plain: 'Quand une ', em: 'idée doit devenir un produit', tail: '…' },
-  { plain: 'Quand le ', em: 'délai de lancement', tail: ' était déjà hier…' },
-]
-
+// lines array moved to component
 // Each line drifts further to the right than the one above it as you scroll.
 const ranges = [
   ['-6%', '6%'],
@@ -22,7 +18,7 @@ function Line({
   progress,
 }: {
   index: number
-  line: (typeof lines)[number]
+  line: { plain: string; em: string; tail: string }
   progress: ReturnType<typeof useScroll>['scrollYProgress']
 }) {
   const x = useTransform(progress, [0, 1], ranges[index])
@@ -40,7 +36,14 @@ function Line({
 }
 
 export function Intro() {
+  const t = useTranslations('Intro')
   const ref = useRef<HTMLElement>(null)
+
+  const lines = [
+    { plain: t('l1_plain'), em: t('l1_em'), tail: t('l1_tail') },
+    { plain: t('l2_plain'), em: t('l2_em'), tail: t('l2_tail') },
+    { plain: t('l3_plain'), em: t('l3_em'), tail: t('l3_tail') },
+  ]
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
