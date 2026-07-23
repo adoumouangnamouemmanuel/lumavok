@@ -131,7 +131,7 @@ export function Contact() {
           priority
           className="object-cover opacity-55"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/30 to-background dark:from-background dark:via-background/60" />
       </motion.div>
 
       {/* Drifting + pulsing accent glow */}
@@ -143,7 +143,7 @@ export function Contact() {
         <motion.div
           animate={{ scale: [1, 1.18, 1], opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-          className="h-[60vmin] w-[60vmin] rounded-full bg-primary/10 dark:bg-primary/30 blur-[80px]"
+          className="h-[60vmin] w-[60vmin] rounded-full bg-primary/5 dark:bg-primary/30 blur-[80px]"
         />
       </motion.div>
 
