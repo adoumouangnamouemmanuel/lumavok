@@ -39,7 +39,7 @@ function CopyField({
       className="group flex items-center justify-between gap-4 rounded-xl border border-border bg-card/60 p-4 backdrop-blur-sm transition-colors hover:border-accent/50"
     >
       <div className="flex items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-accent transition-transform duration-500 group-hover:-translate-y-0.5">
+        <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-primary transition-transform duration-500 group-hover:-translate-y-0.5">
           <Icon className="h-5 w-5" />
         </span>
         <div>
@@ -107,7 +107,7 @@ function Field({
 }
 
 const labelClasses =
-  'pointer-events-none absolute left-4 top-2 text-[10px] font-medium uppercase tracking-[0.15em] text-muted-foreground transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm peer-placeholder-shown:tracking-normal peer-placeholder-shown:normal-case peer-focus:top-2 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-[0.15em] peer-focus:text-accent'
+  'pointer-events-none absolute left-4 top-2 text-[10px] font-medium uppercase tracking-[0.15em] text-muted-foreground transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm peer-placeholder-shown:tracking-normal peer-placeholder-shown:normal-case peer-focus:top-2 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-[0.15em] peer-focus:text-primary'
 
 export function Contact() {
   const ref = useRef<HTMLElement>(null)
@@ -128,6 +128,7 @@ export function Contact() {
           alt=""
           fill
           sizes="100vw"
+          priority
           className="object-cover opacity-55"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
@@ -142,7 +143,7 @@ export function Contact() {
         <motion.div
           animate={{ scale: [1, 1.18, 1], opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-          className="h-[60vmin] w-[60vmin] rounded-full bg-[radial-gradient(circle,oklch(0.5_0.09_320/0.4),transparent_70%)] blur-3xl"
+          className="h-[60vmin] w-[60vmin] rounded-full bg-primary/10 dark:bg-primary/30 blur-[80px]"
         />
       </motion.div>
 
@@ -152,7 +153,7 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-6 text-center font-mono text-xs uppercase tracking-[0.3em] text-accent"
+          className="mb-6 text-center font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground"
         >
           {'// Démarrons un projet'}
         </motion.p>
@@ -178,7 +179,7 @@ export function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.7, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-block font-serif font-light italic tracking-normal text-accent"
+            className="inline-block font-serif font-light italic tracking-normal text-primary"
           >
             idée
           </motion.span>
