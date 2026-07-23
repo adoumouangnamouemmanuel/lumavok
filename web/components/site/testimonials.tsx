@@ -4,38 +4,41 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import { useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
-const quotes = [
-  {
-    text: 'Lumavok a transformé notre vision en une plateforme que nos clients adorent. Un travail soigné, rapide et abordable.',
-    name: 'Nadia Bensalem',
-    role: 'Fondatrice, Marché Atlas',
-    img: '/images/client1.png',
-  },
-  {
-    text: 'Une équipe jeune mais d’un professionnalisme rare. Ils ont livré un système IA qui tourne désormais au cœur de nos opérations.',
-    name: 'Olivier Kabuya',
-    role: 'Directeur, Logistique Sahel',
-    img: '/images/client2.png',
-  },
-  {
-    text: 'Du premier croquis au lancement, chaque détail a été pensé. Notre produit a doublé son taux de conversion.',
-    name: 'Awa Diallo',
-    role: 'CEO, Baobab Pay',
-    img: '/images/client3.png',
-  },
-  {
-    text: 'Des standards mondiaux avec une compréhension fine du marché local. Exactement le partenaire que nous cherchions.',
-    name: 'Samuel Eze',
-    role: 'COO, Horizon Retail',
-    img: '/images/client4.png',
-  },
-]
-
+// quotes array is moved inside component
 export function Testimonials() {
+  const t = useTranslations('Testimonials')
   const [[index, dir], setState] = useState<[number, number]>([0, 0])
   const [cursor, setCursor] = useState({ x: 0, y: 0, side: 1, visible: false })
   const areaRef = useRef<HTMLDivElement>(null)
+
+  const quotes = [
+    {
+      text: t('q1_text'),
+      name: t('q1_name'),
+      role: t('q1_role'),
+      img: '/images/client1.png',
+    },
+    {
+      text: t('q2_text'),
+      name: t('q2_name'),
+      role: t('q2_role'),
+      img: '/images/client2.png',
+    },
+    {
+      text: t('q3_text'),
+      name: t('q3_name'),
+      role: t('q3_role'),
+      img: '/images/client3.png',
+    },
+    {
+      text: t('q4_text'),
+      name: t('q4_name'),
+      role: t('q4_role'),
+      img: '/images/client4.png',
+    },
+  ]
 
   const count = quotes.length
   const current = quotes[index]
@@ -68,9 +71,9 @@ export function Testimonials() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="heading-tight mb-14 text-5xl uppercase md:text-8xl"
         >
-          Ils en parlent
+          {t('title_1')}
           <br />
-          <span className="text-muted-foreground">mieux que nous</span>
+          <span className="text-muted-foreground">{t('title_2')}</span>
         </motion.h2>
 
         <div
@@ -83,7 +86,7 @@ export function Testimonials() {
           {/* Preview of the next person */}
           <div className="hidden md:col-span-3 md:block">
             <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-              Suivant
+              {t('next')}
             </p>
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg opacity-60 transition-opacity hover:opacity-90">
               <Image
