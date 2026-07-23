@@ -252,6 +252,10 @@
     "form_project_label": "Tell us about your project",
     "form_send": "Send message",
     "form_sent": "Message sent",
+    "form_success_title": "Message sent!",
+    "form_success_desc": "We have received your message and will get back to you as soon as possible.",
+    "form_success_btn": "Send another message",
+    "form_sending": "Sending...",
     "marquee": "Let's talk"
   },
   "Footer": {
