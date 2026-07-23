@@ -2,8 +2,9 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowUp, ArrowUpRight } from 'lucide-react'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 import { useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import {
   InstagramIcon,
   LinkedInIcon,
@@ -11,27 +12,7 @@ import {
   YouTubeIcon,
 } from './social-icons'
 
-const cols = [
-  {
-    title: 'Studio',
-    links: [
-      { label: 'À propos', href: '/#a-propos' },
-      { label: 'Notre méthode', href: '/#processus' },
-      { label: 'Nos valeurs', href: '/#valeurs' },
-      { label: 'L’équipe', href: '/#equipe' },
-    ],
-  },
-  {
-    title: 'Services',
-    links: [
-      { label: 'Développement', href: '/#services' },
-      { label: 'IA & Machine Learning', href: '/#services' },
-      { label: 'UI / UX Design', href: '/#services' },
-      { label: 'Tarifs', href: '/#tarifs' },
-    ],
-  },
-]
-
+// cols moved inside component
 const socials = [
   { label: 'LinkedIn', Icon: LinkedInIcon, href: '#' },
   { label: 'Instagram', Icon: InstagramIcon, href: '#' },
@@ -40,8 +21,33 @@ const socials = [
 ]
 
 export function Footer() {
+  const t = useTranslations('Footer')
+  const tNav = useTranslations('Navbar')
+  const tValues = useTranslations('Values')
+  const tServices = useTranslations('Services')
   const ref = useRef<HTMLElement>(null)
   const [subscribed, setSubscribed] = useState(false)
+  
+  const cols = [
+    {
+      title: t('col_studio'),
+      links: [
+        { label: tNav('about'), href: '/#a-propos' },
+        { label: tNav('method'), href: '/#processus' },
+        { label: tValues('title_2'), href: '/#valeurs' },
+        { label: tNav('team'), href: '/#equipe' },
+      ],
+    },
+    {
+      title: t('col_services'),
+      links: [
+        { label: tServices('s1_title'), href: '/#services' },
+        { label: tServices('s2_title'), href: '/#services' },
+        { label: tServices('s3_title'), href: '/#services' },
+        { label: tNav('pricing'), href: '/#tarifs' },
+      ],
+    },
+  ]
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end end'],
@@ -64,11 +70,10 @@ export function Footer() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="text-balance text-3xl font-bold leading-tight tracking-tight text-foreground md:text-4xl"
             >
-              Construisons quelque chose qui compte.
+              {t('tagline')}
             </motion.h2>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Recevez nos idées sur la technologie, le design et l’innovation en
-              Afrique — une fois par mois, sans bruit.
+              {t('newsletter_desc')}
             </p>
           </div>
           <motion.form
@@ -85,14 +90,14 @@ export function Footer() {
             <input
               required
               type="email"
-              placeholder="Votre email"
+              placeholder={t('newsletter_placeholder')}
               className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
             />
             <button
               type="submit"
               className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-4 py-2.5 text-xs font-semibold text-primary-foreground transition-transform hover:scale-[1.03]"
             >
-              {subscribed ? 'Merci !' : 'S’abonner'}
+              {subscribed ? t('newsletter_success') : t('newsletter_btn')}
               <ArrowUpRight className="h-3.5 w-3.5" />
             </button>
           </motion.form>
@@ -112,9 +117,7 @@ export function Footer() {
               Lumavok
             </Link>
             <p className="mt-5 max-w-xs text-pretty text-sm leading-relaxed text-muted-foreground">
-              Studio technologique africain mené par la jeunesse. Sites web,
-              apps, systèmes IA et produits numériques; abordables, adaptables
-              et façonnés avec soin.
+              {t('bio')}
             </p>
             <a
               href="mailto:hello@lumavok.com"
@@ -148,7 +151,7 @@ export function Footer() {
           {/* Socials as icons */}
           <div>
             <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              Suivez-nous
+              {t('col_socials')}
             </h3>
             <div className="mt-5 flex flex-wrap gap-3">
               {socials.map(({ label, Icon, href }) => (
@@ -166,9 +169,9 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col items-start justify-between gap-4 border-t border-border py-8 text-xs text-muted-foreground md:flex-row md:items-center">
-          <p>{`© ${new Date().getFullYear()} Lumavok. Tous droits réservés.`}</p>
+          <p>{`© ${new Date().getFullYear()} Lumavok. ${t('rights')}`}</p>
           <p className="font-mono uppercase tracking-wider">
-            Local solutions, built to global standards.
+            {t('slogan')}
           </p>
         </div>
       </div>
