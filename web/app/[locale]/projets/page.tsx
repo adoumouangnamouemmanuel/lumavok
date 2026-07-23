@@ -1,11 +1,10 @@
 'use client'
 
-
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
-import { useRef } from 'react'
+import { Link } from '@/i18n/routing'
+
 const Github = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -24,75 +23,18 @@ const Github = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
-const projects = [
-  {
-    id: '01',
-    title: 'Marché Atlas',
-    subtitle: 'Plateforme E-commerce B2B',
-    category: 'Web & Backend',
-    year: '2025',
-    img: '/images/g1.png',
-    demoUrl: '#',
-    githubUrl: '#',
-  },
-  {
-    id: '02',
-    title: 'Baobab Pay',
-    subtitle: 'Application Fintech Sahel',
-    category: 'Mobile & UI/UX',
-    year: '2025',
-    img: '/images/g3.png',
-    demoUrl: '#',
-    githubUrl: '#',
-  },
-  {
-    id: '03',
-    title: 'Logistique IA',
-    subtitle: 'Système d\'optimisation prédictif',
-    category: 'Intelligence Artificielle',
-    year: '2024',
-    img: '/images/g5.png',
-    demoUrl: '#',
-    githubUrl: '#',
-  },
-  {
-    id: '04',
-    title: 'Horizon Retail',
-    subtitle: 'Tableau de bord Analytics',
-    category: 'SaaS & Web',
-    year: '2024',
-    img: '/images/g4.png',
-    demoUrl: '#',
-    githubUrl: '#',
-  },
-  {
-    id: '05',
-    title: 'Fondation Éducation',
-    subtitle: 'Identité Numérique & Portail',
-    category: 'Design & Web',
-    year: '2024',
-    img: '/images/g2.png',
-    demoUrl: '#',
-    githubUrl: '#',
-  },
-]
+import { useLocale } from 'next-intl'
+import { getProjects } from '@/lib/projects'
 
 export default function ProjectsPage() {
-  const targetRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  })
-
-  // Move the container horizontally based on scroll progress
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-80%'])
-  // Background parallax to give depth during horizontal scroll
-  const bgX = useTransform(scrollYProgress, [0, 1], ['0%', '10%'])
+  const locale = useLocale()
+  const projects = getProjects(locale)
 
   return (
     <main className="relative bg-background">
 
       {/* Hero Intro */}
-      <section className="relative flex min-h-[50vh] flex-col items-center justify-center pt-32 px-6 pb-20 text-center md:min-h-[60vh]">
+      <section className="relative flex flex-col items-center justify-center pt-40 px-6 pb-20 text-center">
         <div className="mx-auto flex max-w-4xl flex-col items-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -106,100 +48,107 @@ export default function ProjectsPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="heading-tight text-balance text-6xl uppercase sm:text-7xl md:text-8xl lg:text-9xl"
+            className="heading-tight text-balance text-5xl font-extrabold uppercase sm:text-7xl md:text-8xl lg:text-9xl"
           >
             Notre <span className="font-serif font-light italic text-muted-foreground">Portfolio</span>
           </motion.h1>
         </div>
       </section>
 
-      {/* Horizontal Scroll Gallery */}
-      <section ref={targetRef} className="relative h-[400vh] bg-background">
-        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-          {/* Subtle background texture that moves slightly against the scroll */}
-          <motion.div
-            style={{ x: bgX }}
-            className="pointer-events-none absolute inset-0 opacity-[0.03]"
-            aria-hidden="true"
-          >
-            <div className="h-full w-full bg-[url('data:image/svg+xml;utf8,%3Csvg%20viewBox=%220%200%20200%20200%22%20xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter%20id=%22noiseFilter%22%3E%3CfeTurbulence%20type=%22fractalNoise%22%20baseFrequency=%220.65%22%20numOctaves=%223%22%20stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect%20width=%22100%25%22%20height=%22100%25%22%20filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')] bg-repeat" />
-          </motion.div>
+      {/* Bento Box Gallery */}
+      <section className="relative z-10 mx-auto max-w-[1400px] px-4 pb-32 sm:px-6">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense">
+          {projects.map((p, i) => {
+            // Featured projects span 2 columns on medium screens and up
+            const isLarge = p.featured;
+            
+            return (
+              <motion.div 
+                key={p.slug}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                className={`group relative flex flex-col overflow-hidden rounded-3xl bg-card shadow-2xl transition-all duration-700 hover:shadow-accent/20 
+                  ${isLarge ? 'md:col-span-2 lg:col-span-2' : 'col-span-1'}
+                  min-h-[400px] sm:min-h-[450px] lg:min-h-[500px]
+                `}
+              >
+                <Link href={`/projets/${p.slug}`} className="absolute inset-0 z-10 block">
+                  <span className="sr-only">Voir le projet {p.title}</span>
+                </Link>
 
-          <motion.div style={{ x }} className="flex h-full items-center gap-12 px-[10vw] md:gap-24">
-            {projects.map((p, i) => (
-              <div key={p.id} className="group relative flex h-[70vh] w-[80vw] shrink-0 flex-col justify-center sm:w-[60vw] lg:w-[45vw]">
                 {/* Number Watermark */}
-                <span className="absolute -left-12 -top-12 z-0 font-serif text-[180px] font-bold leading-none text-foreground/[0.03] transition-colors duration-700 group-hover:text-accent/[0.08] md:-left-20 md:-top-20 md:text-[300px]">
-                  {p.id}
+                <span className="absolute -left-6 -top-6 z-0 font-serif text-[120px] font-bold leading-none text-foreground/[0.03] transition-colors duration-700 group-hover:text-accent/[0.08] sm:-left-8 sm:-top-8 sm:text-[150px]">
+                  {String(i + 1).padStart(2, '0')}
                 </span>
 
-                <Link href={`/projets/${p.id}`} className="relative z-10 block h-full w-full overflow-hidden rounded-3xl bg-card shadow-2xl transition-all duration-700 group-hover:shadow-accent/20">
-                  <div className="relative h-full w-full transition-transform duration-1000 group-hover:scale-105">
-                    <Image
-                      src={p.img}
-                      alt={p.title}
-                      fill
-                      sizes="(max-width: 1024px) 80vw, 45vw"
-                      className="object-cover opacity-80 transition-opacity duration-700 group-hover:opacity-100"
-                      priority={i === 0}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent" />
+                {/* Background Image */}
+                <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-105">
+                  <Image
+                    src={p.image || '/images/projects/logo.png'}
+                    alt={p.title}
+                    fill
+                    sizes={isLarge ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
+                    className="object-cover opacity-80 transition-opacity duration-700 group-hover:opacity-100"
+                    priority={i < 3}
+                  />
+                  <div className="absolute inset-0 bg-black/20" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
+                </div>
+                
+                {/* Overlay Content */}
+                <div className="relative z-20 mt-auto flex flex-col justify-end p-6 sm:p-8 md:p-10 pointer-events-none">
+                  <div className="flex items-center gap-4 text-white/80">
+                    <span className="font-mono text-xs uppercase tracking-widest drop-shadow-sm">
+                      {p.date.split('-')[0]}
+                    </span>
+                    <span className="h-px w-6 bg-white/50" />
+                    <span className="font-mono text-xs uppercase tracking-widest drop-shadow-sm">
+                      {p.category}
+                    </span>
                   </div>
                   
-                  {/* Overlay Content */}
-                  <div className="absolute bottom-0 left-0 flex w-full flex-col justify-end p-8 md:p-12">
-                    <div className="flex items-center gap-4 text-accent">
-                      <span className="font-mono text-xs uppercase tracking-widest">
-                        {p.year}
-                      </span>
-                      <span className="h-px w-8 bg-accent/50" />
-                      <span className="font-mono text-xs uppercase tracking-widest">
-                        {p.category}
-                      </span>
-                    </div>
+                  <h2 className="mt-3 text-2xl font-extrabold uppercase tracking-tight text-white drop-shadow-md sm:text-3xl md:text-4xl">
+                    {p.title}
+                  </h2>
+                  
+                  <div className="mt-6 flex flex-wrap items-center gap-4 pointer-events-auto">
+                    <Link 
+                      href={`/projets/${p.slug}`}
+                      className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-black transition-transform hover:scale-105 shadow-lg"
+                    >
+                      Étude de cas
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
                     
-                    <h2 className="mt-4 text-4xl font-extrabold uppercase tracking-tight text-foreground md:text-6xl">
-                      {p.title}
-                    </h2>
-                    <p className="mt-2 max-w-md font-serif text-xl font-light italic text-foreground/80 md:text-2xl">
-                      {p.subtitle}
-                    </p>
-                    
-                    <div className="mt-8 flex flex-wrap items-center gap-4">
-                      <div className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold uppercase tracking-wider text-background transition-transform hover:scale-105">
-                        Lire l'étude de cas
-                        <ArrowRight className="h-4 w-4" />
-                      </div>
-                      
-                      {/* Interactive Buttons (Stop propagation so they don't trigger the Link wrapper if they were separate, but here we placed them inside a Link. Let's fix that by making the buttons standalone) */}
-                    </div>
+                    {p.demo && (
+                      <a
+                        href={p.demo}
+                        className="group/btn inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 backdrop-blur-md px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white transition-all hover:border-white hover:bg-white hover:text-black"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
+                        Live
+                      </a>
+                    )}
+                    {p.github && (
+                      <a
+                        href={p.github}
+                        className="group/btn inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 backdrop-blur-md px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white transition-all hover:bg-white hover:text-black hover:border-white"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Github className="h-4 w-4 transition-transform group-hover/btn:scale-110" />
+                        {p.github.split('/').pop() || 'Code'}
+                      </a>
+                    )}
                   </div>
-                </Link>
-                
-                {/* External Actions (Placed OUTSIDE the Link to prevent hydration mismatch / nested anchors) */}
-                <div className="relative z-20 mt-6 flex items-center gap-4 pl-4">
-                  <a
-                    href={p.demoUrl}
-                    className="group/btn inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-foreground transition-all hover:border-accent hover:text-accent"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
-                    Live Demo
-                  </a>
-                  <a
-                    href={p.githubUrl}
-                    className="group/btn inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-foreground transition-all hover:bg-foreground hover:text-background"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Github className="h-4 w-4 transition-transform group-hover/btn:scale-110" />
-                    GitHub
-                  </a>
                 </div>
-              </div>
-            ))}
-          </motion.div>
+              </motion.div>
+            )
+          })}
         </div>
       </section>
 
