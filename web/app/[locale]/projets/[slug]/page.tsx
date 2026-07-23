@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 import { useParams } from 'next/navigation'
 import { useRef } from 'react'
 import { useLocale } from 'next-intl'
