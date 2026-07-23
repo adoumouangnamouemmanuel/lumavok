@@ -1,9 +1,10 @@
 'use client'
 
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowUpRight, Check, Copy, Mail, Phone } from 'lucide-react'
+import { ArrowUpRight, Check, Copy, Mail, Phone, Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import { useRef, useState } from 'react'
+import emailjs from '@emailjs/browser'
 import { useTranslations } from 'next-intl'
 import { Marquee } from './marquee'
 
@@ -113,11 +114,38 @@ const labelClasses =
 export function Contact() {
   const t = useTranslations('Contact')
   const ref = useRef<HTMLElement>(null)
-  const [sent, setSent] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   })
+
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    emailjs
+      .sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '',
+        formRef.current!,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ''
+      )
+      .then(
+        () => {
+          setIsSubmitting(false)
+          setIsSuccess(true)
+          if (formRef.current) formRef.current.reset()
+        },
+        (error) => {
+          console.error('FAILED...', error.text)
+          setIsSubmitting(false)
+          alert('Une erreur est survenue. Veuillez réessayer. / An error occurred. Please try again.')
+        }
+      )
+  }
   const bgScale = useTransform(scrollYProgress, [0, 1], [1.22, 1])
   const bgY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%'])
   const glowY = useTransform(scrollYProgress, [0, 1], ['20%', '-20%'])
@@ -207,98 +235,136 @@ export function Contact() {
           </div>
 
           {/* Premium form, animates in on scroll */}
-          <motion.form
+          <motion.div
             initial={{ opacity: 0, y: 60, scale: 0.96, rotateX: 10 }}
             whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
             viewport={{ once: true, margin: '-120px' }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             whileHover={{ y: -6 }}
-            onSubmit={(e) => {
-              e.preventDefault()
-              setSent(true)
-            }}
-            className="relative rounded-2xl border border-border bg-card/70 p-6 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.9)] backdrop-blur-md transition-shadow md:p-8"
+            className="relative rounded-2xl border border-border bg-card/70 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.9)] backdrop-blur-md transition-shadow"
           >
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-accent/30 via-transparent to-transparent opacity-0 transition-opacity duration-500 [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [mask-composite:exclude] [padding:1px] hover:opacity-100"
             />
-            <div className="flex flex-col gap-4">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <Field index={0}>
-                  <input id="c-name" required placeholder={t('form_name')} className={fieldClasses} />
-                  <label htmlFor="c-name" className={labelClasses}>
-                    {t('form_name')}
-                  </label>
-                </Field>
-                <Field index={1}>
-                  <input
-                    id="c-email"
-                    required
-                    type="email"
-                    placeholder="Email"
-                    className={fieldClasses}
-                  />
-                  <label htmlFor="c-email" className={labelClasses}>
-                    Email
-                  </label>
-                </Field>
-              </div>
-              <Field index={2}>
-                <input
-                  id="c-company"
-                  placeholder={t('form_company')}
-                  className={fieldClasses}
-                />
-                <label htmlFor="c-company" className={labelClasses}>
-                  {t('form_company')}
-                </label>
-              </Field>
-              <Field index={3}>
-                <textarea
-                  id="c-msg"
-                  required
-                  rows={4}
-                  placeholder={t('form_project')}
-                  className={`${fieldClasses} resize-none`}
-                />
-                <label htmlFor="c-msg" className={labelClasses}>
-                  {t('form_project_label')}
-                </label>
-              </Field>
-              <Field index={4}>
-                <button
-                  type="submit"
-                  disabled={sent}
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.02]"
+            
+            <AnimatePresence mode="wait">
+              {isSuccess ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="flex flex-col items-center justify-center p-12 text-center md:p-16"
                 >
-                  <AnimatePresence mode="wait" initial={false}>
-                    {sent ? (
-                      <motion.span
-                        key="sent"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2"
+                  <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Check className="h-10 w-10" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground">{t('form_success_title')}</h3>
+                  <p className="mt-3 max-w-[280px] text-sm text-muted-foreground">
+                    {t('form_success_desc')}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setIsSuccess(false)}
+                    className="mt-8 text-sm font-medium text-primary underline-offset-4 hover:underline"
+                  >
+                    {t('form_success_btn')}
+                  </button>
+                </motion.div>
+              ) : (
+                <motion.form
+                  key="form"
+                  ref={formRef}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onSubmit={sendEmail}
+                  className="p-6 md:p-8"
+                >
+                  <div className="flex flex-col gap-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                      <Field index={0}>
+                        <input id="c-name" name="user_name" required placeholder={t('form_name')} className={fieldClasses} />
+                        <label htmlFor="c-name" className={labelClasses}>
+                          {t('form_name')}
+                        </label>
+                      </Field>
+                      <Field index={1}>
+                        <input
+                          id="c-email"
+                          name="user_email"
+                          required
+                          type="email"
+                          placeholder="Email"
+                          className={fieldClasses}
+                        />
+                        <label htmlFor="c-email" className={labelClasses}>
+                          Email
+                        </label>
+                      </Field>
+                    </div>
+                    <Field index={2}>
+                      <input
+                        id="c-company"
+                        name="user_company"
+                        placeholder={t('form_company')}
+                        className={fieldClasses}
+                      />
+                      <label htmlFor="c-company" className={labelClasses}>
+                        {t('form_company')}
+                      </label>
+                    </Field>
+                    <Field index={3}>
+                      <textarea
+                        id="c-msg"
+                        name="message"
+                        required
+                        rows={4}
+                        placeholder={t('form_project')}
+                        className={`${fieldClasses} resize-none`}
+                      />
+                      <label htmlFor="c-msg" className={labelClasses}>
+                        {t('form_project_label')}
+                      </label>
+                    </Field>
+                    <Field index={4}>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100"
                       >
-                        {t('form_sent')} <Check className="h-4 w-4" />
-                      </motion.span>
-                    ) : (
-                      <motion.span
-                        key="send"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="inline-flex items-center gap-2"
-                      >
-                        {t('form_send')}
-                        <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </button>
-              </Field>
-            </div>
-          </motion.form>
+                        <AnimatePresence mode="wait" initial={false}>
+                          {isSubmitting ? (
+                            <motion.span
+                              key="sending"
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -10 }}
+                              className="inline-flex items-center gap-2"
+                            >
+                              <Loader2 className="h-4 w-4 animate-spin" /> {t('form_sending')}
+                            </motion.span>
+                          ) : (
+                            <motion.span
+                              key="send"
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -10 }}
+                              className="inline-flex items-center gap-2"
+                            >
+                              {t('form_send')}
+                              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                            </motion.span>
+                          )}
+                        </AnimatePresence>
+                      </button>
+                    </Field>
+                  </div>
+                </motion.form>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
 
