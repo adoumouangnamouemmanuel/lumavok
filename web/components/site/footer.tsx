@@ -106,7 +106,7 @@ export function Footer() {
               className="flex items-center gap-2 text-2xl font-extrabold uppercase tracking-tight"
             >
               <span
-                className="inline-block h-3 w-3 rounded-full bg-accent"
+                className="inline-block h-3 w-3 rounded-full bg-primary"
                 aria-hidden="true"
               />
               Lumavok
@@ -118,14 +118,14 @@ export function Footer() {
             </p>
             <a
               href="mailto:hello@lumavok.com"
-              className="mt-6 inline-block border-b border-foreground/30 pb-1 text-sm text-foreground transition-colors hover:border-accent hover:text-accent"
+              className="mt-6 inline-block border-b border-foreground/30 pb-1 text-sm text-foreground transition-colors hover:border-primary hover:text-primary"
             >
               hello@lumavok.com
             </a>
           </div>
           {cols.map((c) => (
             <nav key={c.title} aria-label={c.title}>
-              <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
+              <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
                 {c.title}
               </h3>
               <ul className="mt-5 space-y-3">
@@ -147,7 +147,7 @@ export function Footer() {
           ))}
           {/* Socials as icons */}
           <div>
-            <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
+            <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
               Suivez-nous
             </h3>
             <div className="mt-5 flex flex-wrap gap-3">
