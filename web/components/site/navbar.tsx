@@ -1,18 +1,10 @@
 'use client'
 
-import Link from 'next/link'
+import { useTranslations, useLocale } from 'next-intl'
+import { Link, usePathname } from '@/i18n/routing'
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
 import { ModeToggle } from '@/components/site/mode-toggle'
-
-const links = [
-  { label: 'À propos', href: '/#a-propos' },
-  { label: 'Services', href: '/#services' },
-  { label: 'Projets', href: '/projets' },
-  { label: 'Méthode', href: '/#processus' },
-  { label: 'Tarifs', href: '/#tarifs' },
-  { label: 'Équipe', href: '/#equipe' },
-]
 
 function Logo({ isScrolled }: { isScrolled: boolean }) {
   return (
@@ -47,12 +39,40 @@ function Logo({ isScrolled }: { isScrolled: boolean }) {
   )
 }
 
+function LanguageSwitcher({ isScrolled }: { isScrolled: boolean }) {
+  const locale = useLocale()
+  const pathname = usePathname()
+  const nextLocale = locale === 'fr' ? 'en' : 'fr'
 
+  return (
+    <Link
+      href={pathname}
+      locale={nextLocale}
+      className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold transition-colors ${
+        isScrolled
+          ? 'bg-secondary text-foreground hover:bg-foreground hover:text-background'
+          : 'bg-white/10 text-white hover:bg-white hover:text-black'
+      }`}
+    >
+      {locale === 'fr' ? 'EN' : 'FR'}
+    </Link>
+  )
+}
 
 export function Navbar() {
+  const t = useTranslations('Navbar')
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
+
+  const links = [
+    { label: t('about'), href: '/#a-propos' },
+    { label: t('services'), href: '/#services' },
+    { label: t('projects'), href: '/projets' },
+    { label: t('method'), href: '/#processus' },
+    { label: t('pricing'), href: '/#tarifs' },
+    { label: t('team'), href: '/#equipe' },
+  ]
 
   const { scrollY } = useScroll()
 
@@ -118,6 +138,7 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
+          <LanguageSwitcher isScrolled={isScrolled} />
           <ModeToggle scrolled={isScrolled} />
           <Link
             href="/#contact"
@@ -127,7 +148,7 @@ export function Navbar() {
                 : 'border-white/30 text-white hover:bg-white hover:text-black'
             }`}
           >
-            Contact
+            {t('contact')}
           </Link>
           <button
             type="button"
@@ -152,7 +173,10 @@ export function Navbar() {
       {open && (
         <div className="border-t border-border bg-background/95 backdrop-blur-md lg:hidden">
           <ul className="flex flex-col px-5 py-4">
-            {[...links, { label: 'Contact', href: '/#contact' }].map((l) => (
+            <li className="mb-4">
+              <LanguageSwitcher isScrolled={true} />
+            </li>
+            {[...links, { label: t('contact'), href: '/#contact' }].map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
