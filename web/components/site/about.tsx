@@ -108,24 +108,36 @@ export function About() {
       </div>
 
       <div className="relative z-10 mt-16 md:mt-24 md:max-w-2xl">
-        <p className="flex flex-wrap gap-x-2 font-serif text-xl font-light leading-relaxed text-foreground/85 md:text-2xl">
+        <motion.p
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-80px' }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: { staggerChildren: 0.05 },
+            },
+          }}
+          className="flex flex-wrap gap-x-2 font-serif text-xl font-light leading-relaxed text-foreground/85 md:text-2xl"
+        >
           {words.map((w, i) => (
             <motion.span
               key={i}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{
-                duration: 0.6,
-                delay: i * 0.05,
-                ease: [0.22, 1, 0.36, 1],
+              variants={{
+                hidden: { opacity: 0, y: 18 },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+                },
               }}
               className={i >= 6 ? 'italic text-foreground' : undefined}
             >
               {w}
             </motion.span>
           ))}
-        </p>
+        </motion.p>
         <motion.p
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

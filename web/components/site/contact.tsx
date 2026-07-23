@@ -187,17 +187,29 @@ export function Contact() {
         >
           {t('subtitle')}
         </motion.p>
-        <h2 className="heading-tight mx-auto max-w-4xl text-balance text-center text-5xl uppercase md:text-8xl">
+        <motion.h2 
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-60px' }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: { staggerChildren: 0.08 },
+            },
+          }}
+          className="heading-tight mx-auto max-w-4xl text-balance text-center text-5xl uppercase md:text-8xl"
+        >
           {(t.raw('title_words') as string[]).map((w, i) => (
             <motion.span
               key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{
-                duration: 0.7,
-                delay: i * 0.08,
-                ease: [0.22, 1, 0.36, 1],
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                show: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+                },
               }}
               className="mr-[0.25em] inline-block"
             >
@@ -205,15 +217,19 @@ export function Contact() {
             </motion.span>
           ))}
           <motion.span
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            variants={{
+              hidden: { opacity: 0, y: 40 },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.7, delay: 0.32, ease: [0.22, 1, 0.36, 1] },
+              },
+            }}
             className="inline-block font-serif font-light italic tracking-normal text-primary"
           >
             {t('title_highlight')}
           </motion.span>
-        </h2>
+        </motion.h2>
 
         <div
           style={{ perspective: 1200 }}
