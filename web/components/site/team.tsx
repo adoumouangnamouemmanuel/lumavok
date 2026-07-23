@@ -230,8 +230,7 @@ export function Team() {
                 layoutId={`team-card-${selectedMember.name}`}
                 className="pointer-events-auto relative z-10 flex w-full max-w-4xl max-h-[90vh] flex-col overflow-hidden rounded-[2rem] bg-card shadow-2xl ring-1 ring-border md:flex-row"
               >
-                {/* Left/Top Image Cover */}
-                <div className="relative h-64 w-full shrink-0 md:h-auto md:w-5/12">
+                <div className="relative h-100 w-full shrink-0 md:h-auto md:w-5/12">
                   <Image
                     src={selectedMember.img}
                     alt={selectedMember.name}
