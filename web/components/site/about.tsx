@@ -4,20 +4,11 @@ import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { useRef } from 'react'
 
-const words = [
-  'Lumavok',
-  'est',
-  'un',
-  'studio',
-  'technologique',
-  'africain',
-  'porté',
-  'par',
-  'la',
-  'jeunesse.',
-]
+import { useTranslations } from 'next-intl'
 
 export function About() {
+  const t = useTranslations('About')
+  const words = t.raw('words') as string[]
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -52,7 +43,7 @@ export function About() {
         aria-hidden="true"
         className="heading-tight pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 whitespace-nowrap text-[26vw] uppercase text-foreground"
       >
-        Studio
+        {t('title_1')}
       </motion.span>
 
       <div className="relative grid grid-cols-1 items-center gap-8 md:grid-cols-12">
@@ -92,10 +83,10 @@ export function About() {
             className="absolute -left-4 bottom-10 hidden rounded-xl border border-border bg-card/80 px-4 py-3 backdrop-blur-md md:block"
           >
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-              Depuis 2026
+              {t('badge_year')}
             </p>
             <p className="text-sm font-semibold text-foreground">
-              Conçu en Afrique
+              {t('badge_made')}
             </p>
           </motion.div>
         </div>
@@ -105,13 +96,13 @@ export function About() {
           className="relative z-10 md:col-span-8 md:col-start-1 md:row-start-1"
         >
           <h2 className="heading-tight text-[13vw] uppercase text-foreground drop-shadow-[0_10px_40px_rgba(0,0,0,0.55)] sm:text-6xl md:text-7xl lg:text-8xl">
-            Des produits
+            {t('title_1')}
             <br />
-            <span className="text-muted-foreground">numériques</span>
+            <span className="text-muted-foreground">{t('title_2')}</span>
             <br />
-            qui marquent
+            {t('title_3')}
             <br />
-            les esprits
+            {t('title_4')}
           </h2>
         </motion.div>
       </div>
@@ -142,13 +133,12 @@ export function About() {
           transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="mt-6 font-serif text-xl font-light leading-relaxed text-foreground/70 md:text-2xl"
         >
-          Nous prenons le temps de comprendre votre vision jusque dans les{' '}
-          <span className="italic text-foreground">moindres détails</span>, puis
-          nous la transformons en un produit{' '}
+          {t('p_1')}
+          <span className="italic text-foreground">{t('p_2')}</span>{t('p_3')}
           <span className="italic text-foreground">
-            abordable, adaptable et façonné avec soin
+            {t('p_4')}
           </span>
-          .
+          {t('p_5')}
         </motion.p>
         <motion.div
           initial={{ scaleX: 0 }}
