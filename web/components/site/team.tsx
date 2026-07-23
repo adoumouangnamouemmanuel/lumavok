@@ -4,59 +4,12 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { Mail } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
-const members = [
-  {
-    name: 'Deubaybe Dounia',
-    role: 'Cheffe de projet',
-    img: '/images/dounia.webp',
-    bio: 'Pilote la planification, l\u2019exécution et la livraison de chaque projet Lumavok, dans les délais et les standards de qualité.',
-    linkedin: 'https://www.linkedin.com/in/deubaybe-dounia/',
-    email: 'successdouni.a@gmail.com',
-  },
-  {
-    name: 'Emmanuel Adoum',
-    role: 'Directeur Technique (CTO)',
-    img: '/images/emma.webp',
-    bio: 'Définit la vision technologique et veille à des produits sécurisés, évolutifs et toujours en avance sur les tendances.',
-    linkedin: 'https://www.linkedin.com/in/emmanueladoum',
-    email: 'emmanuel.ouangnamou@gmail.com',
-  },
-  {
-    name: 'Clement Sampebgo',
-    role: 'Administrateur Base de données',
-    img: '/images/clement.webp',
-    bio: 'Conçoit et maintient des bases de données fiables, sécurisées et performantes pour chaque produit.',
-    linkedin: 'https://www.linkedin.com/in/clement-sampebgo/',
-    email: 'cl.sampebgo@gmail.com',
-  },
-  {
-    name: 'Soaliye Kindo Albert',
-    role: 'Ingénieur principal',
-    img: '/images/soaliye.webp',
-    bio: 'Guide la direction technique, garantit la qualité du code et l’architecture de nos solutions.',
-    linkedin: 'https://www.linkedin.com/in/kindo-soaliye-albert/',
-    email: 'kindo.soaliye@gmail.com',
-  },
-  {
-    name: 'Tomoh Claude',
-    role: 'Responsable Contenu & Réseaux sociaux',
-    img: '/images/tomoh.webp',
-    bio: 'Crée et gère un contenu cohérent et engageant sur toutes nos plateformes en ligne.',
-    linkedin: 'https://www.linkedin.com/in/claude-tomoh',
-    email: 'claudetomo20@gmail.com',
-  },
-  {
-    name: 'Abdoul-Akim N\u2019Goila',
-    role: 'Producteur Multimédia',
-    img: '/images/akim.webp',
-    bio: 'Imagine, filme et monte les vidéos qui racontent l\u2019histoire et les projets de Lumavok.',
-    linkedin: 'https://www.linkedin.com/in/abdoul-akim',
-    email: 'abdoul.akeem998@gmail.com',
-  },
-]
+// members array is moved inside component
+type Member = { name: string; role: string; img: string; bio: string; linkedin: string; email: string }
 
-function MemberCard({ m, index }: { m: (typeof members)[number]; index: number }) {
+function MemberCard({ m, index }: { m: Member; index: number }) {
   return (
     <motion.article
       whileHover="hover"
@@ -85,7 +38,7 @@ function MemberCard({ m, index }: { m: (typeof members)[number]; index: number }
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 dark:from-background dark:via-background/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/5 to-transparent dark:from-background dark:via-background/30" />
 
       <div className="relative mt-auto p-6">
         <h3 className="text-xl font-bold leading-tight text-foreground">
@@ -130,9 +83,61 @@ function MemberCard({ m, index }: { m: (typeof members)[number]; index: number }
 }
 
 export function Team() {
+  const t = useTranslations('Team')
   const ref = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const [maxX, setMaxX] = useState(0)
+
+  const members: Member[] = [
+    {
+      name: 'Deubaybe Dounia',
+      role: t('m1_role'),
+      img: '/images/dounia.webp',
+      bio: t('m1_bio'),
+      linkedin: 'https://www.linkedin.com/in/deubaybe-dounia/',
+      email: 'successdouni.a@gmail.com',
+    },
+    {
+      name: 'Emmanuel Adoum',
+      role: t('m2_role'),
+      img: '/images/emma.webp',
+      bio: t('m2_bio'),
+      linkedin: 'https://www.linkedin.com/in/emmanueladoum',
+      email: 'emmanuel.ouangnamou@gmail.com',
+    },
+    {
+      name: 'Clement Sampebgo',
+      role: t('m3_role'),
+      img: '/images/clement.webp',
+      bio: t('m3_bio'),
+      linkedin: 'https://www.linkedin.com/in/clement-sampebgo/',
+      email: 'cl.sampebgo@gmail.com',
+    },
+    {
+      name: 'Soaliye Kindo Albert',
+      role: t('m4_role'),
+      img: '/images/soaliye.webp',
+      bio: t('m4_bio'),
+      linkedin: 'https://www.linkedin.com/in/kindo-soaliye-albert/',
+      email: 'kindo.soaliye@gmail.com',
+    },
+    {
+      name: 'Tomoh Claude',
+      role: t('m5_role'),
+      img: '/images/tomoh.webp',
+      bio: t('m5_bio'),
+      linkedin: 'https://www.linkedin.com/in/claude-tomoh',
+      email: 'claudetomo20@gmail.com',
+    },
+    {
+      name: 'Abdoul-Akim N\u2019Goila',
+      role: t('m6_role'),
+      img: '/images/akim.webp',
+      bio: t('m6_bio'),
+      linkedin: 'https://www.linkedin.com/in/abdoul-akim',
+      email: 'abdoul.akeem998@gmail.com',
+    },
+  ]
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -159,12 +164,12 @@ export function Team() {
       <div className="sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden">
         <div className="mx-auto mb-10 w-full max-w-7xl px-6">
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            {'// L\u2019équipe'}
+            {t('subtitle')}
           </p>
           <h2 className="heading-tight max-w-4xl text-balance text-4xl uppercase md:text-6xl">
-            {'Des esprits jeunes, '}
+            {t('title1')}
             <span className="font-serif text-3xl font-light italic tracking-normal text-muted-foreground md:text-5xl">
-              une ambition mondiale
+              {t('title2')}
             </span>
           </h2>
         </div>
