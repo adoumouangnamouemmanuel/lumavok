@@ -74,7 +74,7 @@ export function Gallery() {
           style={{ scale: wordScale, opacity: wordOpacity }}
           className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center"
         >
-          <h2 className="heading-tight text-[18vw] uppercase text-foreground drop-shadow-[0_8px_40px_rgba(0,0,0,0.7)] md:text-[13vw]">
+          <h2 className="heading-tight text-[18vw] uppercase text-white drop-shadow-[0_8px_40px_rgba(0,0,0,0.7)] md:text-[13vw]">
             Lumavok
           </h2>
         </motion.div>
