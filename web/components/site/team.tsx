@@ -13,12 +13,12 @@ type Member = { name: string; role: string; country: string; flag: string; img: 
 function MemberCard({ m, index, onClick }: { m: Member; index: number; onClick: () => void }) {
   return (
     <motion.article
-      layoutId={`team-card-${m.name}`}
       onClick={onClick}
       className="group relative flex h-[420px] w-[270px] shrink-0 cursor-pointer flex-col overflow-hidden rounded-xl bg-secondary sm:h-[470px] sm:w-[320px] ring-1 ring-border/50 hover:ring-primary/50 transition-shadow"
+      style={{ contain: 'layout style paint' }}
     >
       {/* Optimised image with Next.js <Image> for lazy-loading + decoding */}
-      <motion.div className="absolute inset-0 h-full w-full">
+      <motion.div className="absolute inset-0 h-full w-full" style={{ willChange: 'transform' }}>
         <Image
           src={m.img}
           alt={`Portrait de ${m.name}`}
@@ -32,24 +32,22 @@ function MemberCard({ m, index, onClick }: { m: Member; index: number; onClick: 
 
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
 
-      <motion.div layoutId={`team-content-${m.name}`} className="relative mt-auto flex flex-col p-6">
+      <div className="relative mt-auto flex flex-col p-6">
         <div className="flex items-center justify-between gap-3">
-          <motion.h3 layoutId={`team-name-${m.name}`} className="text-xl font-bold leading-tight text-white">
+          <h3 className="text-xl font-bold leading-tight text-white">
             {m.name}
-          </motion.h3>
-          <motion.img 
-            layoutId={`team-flag-${m.name}`} 
+          </h3>
+          <img 
             src={`https://flagcdn.com/${m.flag}.svg`} 
             alt={m.country} 
             className="w-5 shrink-0 rounded-[2px] shadow-sm ring-1 ring-white/20 opacity-90" 
           />
         </div>
-        <motion.div layoutId={`team-role-${m.name}`} className="mt-1 font-mono text-xs uppercase tracking-wider text-white/70">
+        <div className="mt-1 font-mono text-xs uppercase tracking-wider text-white/70">
           <span>{m.role}</span>
-        </motion.div>
+        </div>
 
-        {/* Social icons — always visible */}
-        <motion.div layoutId={`team-socials-${m.name}`} className="mt-4 flex items-center gap-3">
+        <div className="mt-4 flex items-center gap-3">
           <a
             href={m.linkedin}
             target="_blank"
@@ -70,8 +68,8 @@ function MemberCard({ m, index, onClick }: { m: Member; index: number; onClick: 
           >
             <Mail className="h-4 w-4" />
           </a>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </motion.article>
   )
 }
@@ -184,7 +182,7 @@ export function Team() {
 
         <motion.div
           ref={trackRef}
-          style={{ x }}
+          style={{ x, willChange: 'transform' }}
           className="flex items-center gap-6 sm:gap-8"
         >
           {/* Leading spacer centers the first card */}
@@ -219,7 +217,10 @@ export function Team() {
               
               <motion.div
                 key={`modal-${selectedMember.name}`}
-                layoutId={`team-card-${selectedMember.name}`}
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="pointer-events-auto relative z-10 flex w-full max-w-4xl max-h-[90vh] flex-col overflow-hidden rounded-[2rem] bg-card shadow-2xl ring-1 ring-border md:flex-row"
               >
                 <div className="relative h-96 w-full shrink-0 md:h-auto md:w-5/12">
@@ -251,25 +252,24 @@ export function Team() {
                     <X className="h-5 w-5 text-foreground" />
                   </button>
 
-                  <motion.div layoutId={`team-content-${selectedMember.name}`} className="mt-6 flex flex-col md:mt-0">
+                  <div className="mt-6 flex flex-col md:mt-0">
                     <div className="flex items-center justify-between gap-4 md:justify-start">
-                      <motion.h3 layoutId={`team-name-${selectedMember.name}`} className="text-3xl font-bold leading-tight text-foreground md:text-5xl">
+                      <h3 className="text-3xl font-bold leading-tight text-foreground md:text-5xl">
                         {selectedMember.name}
-                      </motion.h3>
-                      <motion.img 
-                        layoutId={`team-flag-${selectedMember.name}`} 
+                      </h3>
+                      <img 
                         src={`https://flagcdn.com/${selectedMember.flag}.svg`} 
                         alt={selectedMember.country} 
                         className="w-8 shrink-0 rounded-sm shadow-sm ring-1 ring-black/10 dark:ring-white/10 md:w-10" 
                       />
                     </div>
-                    <motion.div layoutId={`team-role-${selectedMember.name}`} className="mt-2 font-mono text-sm uppercase tracking-widest text-primary flex flex-wrap items-center gap-3">
+                    <div className="mt-2 font-mono text-sm uppercase tracking-widest text-primary flex flex-wrap items-center gap-3">
                       <span>{selectedMember.role}</span>
                       <span className="hidden h-4 w-px bg-primary/30 sm:block" />
                       <span className="text-muted-foreground">{selectedMember.country}</span>
-                    </motion.div>
+                    </div>
 
-                    <motion.div layoutId={`team-socials-${selectedMember.name}`} className="mt-6 flex items-center gap-3">
+                    <div className="mt-6 flex items-center gap-3">
                       <a
                         href={selectedMember.linkedin}
                         target="_blank"
@@ -288,8 +288,8 @@ export function Team() {
                       >
                         <Mail className="h-5 w-5" />
                       </a>
-                    </motion.div>
-                  </motion.div>
+                    </div>
+                  </div>
 
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
