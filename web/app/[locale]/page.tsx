@@ -9,7 +9,7 @@ import { Pricing } from "@/components/site/pricing"
 import { Stats } from "@/components/site/stats"
 import { Values } from "@/components/site/values"
 import { Team } from "@/components/site/team"
-import { Testimonials } from "@/components/site/testimonials"
+// import { Testimonials } from "@/components/site/testimonials"
 import { Contact } from "@/components/site/contact"
 
 /** Normal-flow sections rise over the previous one with a rounded lip + shadow. */
@@ -81,9 +81,9 @@ export default function Page() {
       <Stack z={90}>
         <Team />
       </Stack>
-      <Cover z={100}>
+      {/* <Cover z={100}>
         <Testimonials />
-      </Cover>
+      </Cover> */}
       <Cover z={110}>
         <Contact />
       </Cover>
