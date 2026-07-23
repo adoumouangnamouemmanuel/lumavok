@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Archivo, Newsreader } from 'next/font/google'
+import { Newsreader } from 'next/font/google'
+import { GeistSans } from 'geist/font/sans'
 import '../globals.css'
 import { Navbar } from '@/components/site/navbar'
 import { Footer } from '@/components/site/footer'
@@ -10,12 +11,6 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
-
-const archivo = Archivo({
-  variable: '--font-archivo',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
-})
 
 const newsreader = Newsreader({
   variable: '--font-newsreader',
@@ -55,7 +50,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${archivo.variable} ${newsreader.variable}`}
+      className={`${GeistSans.variable} ${newsreader.variable}`}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
