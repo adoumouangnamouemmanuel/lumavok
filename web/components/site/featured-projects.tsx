@@ -5,34 +5,18 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import { Link } from '@/i18n/routing'
-import { useTranslations } from 'next-intl'
-
-// projects array is moved inside component
+import { useLocale, useTranslations } from 'next-intl'
+import { getProjects } from '@/lib/projects'
 
 export function FeaturedProjects() {
   const t = useTranslations('FeaturedProjects')
+  const locale = useLocale()
   const [hoveredIndex, setHoveredIndex] = useState(0)
 
-  const projects = [
-    {
-      id: '01',
-      title: t('p1_title'),
-      category: t('p1_category'),
-      img: '/images/g1.png',
-    },
-    {
-      id: '02',
-      title: t('p2_title'),
-      category: t('p2_category'),
-      img: '/images/g3.png',
-    },
-    {
-      id: '03',
-      title: t('p3_title'),
-      category: t('p3_category'),
-      img: '/images/g5.png',
-    },
-  ]
+  const allProjects = getProjects(locale)
+  const projects = allProjects.filter(p => p.featured)
+
+
 
   return (
     <section className="relative bg-background py-24 md:py-36">
@@ -76,14 +60,14 @@ export function FeaturedProjects() {
           <div className="flex w-full flex-col">
             {projects.map((p, i) => (
               <Link
-                href={`/projets/${p.id}`}
-                key={p.id}
+                href={`/projets/${p.slug}`}
+                key={p.slug}
                 onMouseEnter={() => setHoveredIndex(i)}
                 className="group flex items-center justify-between border-b border-border/40 py-8 transition-colors hover:border-foreground md:py-12"
               >
                 <div className="flex flex-col gap-3">
                   <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-primary">
-                    {p.id} // {p.category}
+                    {String(i + 1).padStart(2, '0')} // {p.category}
                   </span>
                   <h3 className="text-3xl font-extrabold uppercase tracking-tight text-foreground/50 transition-all duration-500 group-hover:translate-x-4 group-hover:text-foreground md:text-4xl lg:text-5xl">
                     {p.title}
@@ -108,8 +92,8 @@ export function FeaturedProjects() {
                 className="absolute inset-0"
               >
                 <Image
-                  src={projects[hoveredIndex].img}
-                  alt={projects[hoveredIndex].title}
+                  src={projects[hoveredIndex]?.image || '/images/projects/logo.png'}
+                  alt={projects[hoveredIndex]?.title || 'Project'}
                   fill
                   sizes="(max-width: 1024px) 50vw, 40vw"
                   className="object-cover"
