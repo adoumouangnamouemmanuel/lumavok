@@ -41,7 +41,7 @@ export function Marquee({
                   className="flex shrink-0 items-center whitespace-nowrap"
                 >
                   {phrase}
-                  <span className="px-4 text-accent sm:px-8">—</span>
+                  <span className="px-4 text-muted-foreground sm:px-8">—</span>
                 </span>
               )),
             )}
