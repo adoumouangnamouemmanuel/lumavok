@@ -15,18 +15,10 @@ function MemberCard({ m, index, onClick }: { m: Member; index: number; onClick: 
     <motion.article
       layoutId={`team-card-${m.name}`}
       onClick={onClick}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
       className="group relative flex h-[420px] w-[270px] shrink-0 cursor-pointer flex-col overflow-hidden rounded-xl bg-secondary sm:h-[470px] sm:w-[320px] ring-1 ring-border/50 hover:ring-primary/50 transition-shadow"
-      style={{ contain: 'layout style paint' }}
     >
       {/* Optimised image with Next.js <Image> for lazy-loading + decoding */}
-      <motion.div
-        className="absolute inset-0 h-full w-full"
-        style={{ willChange: 'transform' }}
-      >
+      <motion.div className="absolute inset-0 h-full w-full">
         <Image
           src={m.img}
           alt={`Portrait de ${m.name}`}
@@ -192,7 +184,7 @@ export function Team() {
 
         <motion.div
           ref={trackRef}
-          style={{ x, willChange: 'transform' }}
+          style={{ x }}
           className="flex items-center gap-6 sm:gap-8"
         >
           {/* Leading spacer centers the first card */}
