@@ -11,6 +11,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import { useRef } from 'react'
+import { useTranslations } from 'next-intl'
 
 type Value = {
   num: string
@@ -20,51 +21,7 @@ type Value = {
   Icon: LucideIcon
 }
 
-const values: Value[] = [
-  {
-    num: '01',
-    tag: 'Créativité',
-    title: 'Innovation',
-    text: 'Nous prototypons, testons et améliorons sans relâche pour repousser ce que la technologie peut faire.',
-    Icon: Lightbulb,
-  },
-  {
-    num: '02',
-    tag: 'Confiance',
-    title: 'Intégrité',
-    text: 'Nous communiquons avec clarté, tenons nos engagements et travaillons en toute transparence.',
-    Icon: ShieldCheck,
-  },
-  {
-    num: '03',
-    tag: 'Qualité',
-    title: 'Excellence',
-    text: 'Nous testons nos produits, affinons nos designs et documentons chaque étape de notre travail.',
-    Icon: Sparkles,
-  },
-  {
-    num: '04',
-    tag: 'Ensemble',
-    title: 'Collaboration',
-    text: 'Les meilleures solutions se construisent ensemble. Nous écoutons, co-créons et grandissons côte à côte.',
-    Icon: Users,
-  },
-  {
-    num: '05',
-    tag: 'Évolution',
-    title: 'Adaptabilité',
-    text: 'Nous évoluons avec les marchés et les technologies, ouverts au changement et aux retours.',
-    Icon: Layers,
-  },
-  {
-    num: '06',
-    tag: 'Impact',
-    title: 'Autonomisation',
-    text: 'Nos outils aident nos clients à croître \u2014 dans les affaires, l\u2019éducation et la vie communautaire.',
-    Icon: HandHeart,
-  },
-]
-
+// values array is moved inside component
 function ValueCard({
   value,
   index,
@@ -120,12 +77,22 @@ function ValueCard({
 }
 
 export function Values() {
+  const t = useTranslations('Values')
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end end'],
   })
   const lineWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+
+  const values: Value[] = [
+    { num: '01', tag: t('v1_tag'), title: t('v1_title'), text: t('v1_text'), Icon: Lightbulb },
+    { num: '02', tag: t('v2_tag'), title: t('v2_title'), text: t('v2_text'), Icon: ShieldCheck },
+    { num: '03', tag: t('v3_tag'), title: t('v3_title'), text: t('v3_text'), Icon: Sparkles },
+    { num: '04', tag: t('v4_tag'), title: t('v4_title'), text: t('v4_text'), Icon: Users },
+    { num: '05', tag: t('v5_tag'), title: t('v5_title'), text: t('v5_text'), Icon: Layers },
+    { num: '06', tag: t('v6_tag'), title: t('v6_title'), text: t('v6_text'), Icon: HandHeart },
+  ]
 
   return (
     <section ref={ref} className="relative bg-background pb-[10vh]">
@@ -138,12 +105,12 @@ export function Values() {
             transition={{ duration: 0.6 }}
             className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground"
           >
-            {'// Ce qui nous guide'}
+            {t('subtitle')}
           </motion.p>
           <h2 className="heading-tight max-w-4xl text-balance text-4xl uppercase md:text-7xl">
-            {'Nos '}
+            {t('title_1')}
             <span className="font-serif text-3xl font-light italic tracking-normal text-muted-foreground md:text-6xl">
-              valeurs
+              {t('title_2')}
             </span>
           </h2>
           <div className="relative mt-2 h-px w-full overflow-hidden bg-border">
