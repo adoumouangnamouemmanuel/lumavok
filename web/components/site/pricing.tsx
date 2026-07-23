@@ -131,7 +131,7 @@ export function Pricing() {
                     aria-hidden="true"
                     className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent/25 blur-3xl"
                   />
-                  <span className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-accent px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-accent-foreground">
+                  <span className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-primary-foreground">
                     {/* <Sparkles className="h-3 w-3" /> */}
                     Populaire
                   </span>
@@ -177,7 +177,7 @@ export function Pricing() {
                 href="#contact"
                 className={`mt-8 inline-flex items-center justify-center gap-1.5 rounded-full px-5 py-3 text-xs font-semibold uppercase tracking-wider transition-all group-hover:gap-2.5 ${
                   p.featured
-                    ? 'bg-accent text-accent-foreground hover:brightness-110'
+                    ? 'bg-primary text-primary-foreground hover:brightness-110'
                     : 'bg-secondary text-foreground hover:bg-foreground hover:text-background'
                 }`}
               >
