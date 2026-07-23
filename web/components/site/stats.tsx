@@ -108,7 +108,7 @@ function Panel({
         style={isLast ? undefined : { scale: underScale, opacity: underOpacity }}
         className="flex h-full w-full items-center"
       >
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[72vmin] w-[72vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,oklch(0.42_0.08_320/0.6),transparent_70%)] blur-2xl" />
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[72vmin] w-[72vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 dark:bg-primary/30 blur-[80px]" />
         <div className="relative mx-auto w-full max-w-6xl px-6 md:px-16">
           <motion.span className="font-serif text-3xl italic text-muted-foreground md:text-5xl">
             {rounded}
